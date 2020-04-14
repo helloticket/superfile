@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/helderfarias/cnab-go"
+	"github.com/helderfarias/cnab-go/file"
 	"github.com/helderfarias/cnab-go/layout/itau"
-	"github.com/helderfarias/cnab-go/output"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -151,7 +151,7 @@ func TestRemessaItauCnab240Pagamento(t *testing.T) {
 	remessa.Trailer["total_lotes_arquivo"] = remessa.TotalLotes()
 	remessa.Trailer["total_registros"] = remessa.TotalRegistros()
 
-	remessaFile := output.NewRemessaFile(remessa, "itau-pagamentos-cnab240.rem")
+	remessaFile := file.NewRemessaFile(remessa, "itau-pagamentos-cnab240.rem")
 
 	arquivo := remessaFile.Write()
 
@@ -160,4 +160,139 @@ func TestRemessaItauCnab240Pagamento(t *testing.T) {
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
 	assertFile(t, 11, arquivo.Name(), true)
+}
+
+func TestRemessaItauCnab240Cobranca(t *testing.T) {
+	source := strings.NewReader(itau.CNAB240Cobranca)
+	layout, err := cnab.NewLayout("240", source)
+	remessa := cnab.NewRemessa(layout)
+
+	remessa.Header["tipo_inscricao"] = 0
+	remessa.Header["inscricao_numero"] = 00000000000000
+	remessa.Header["agencia"] = 0000
+	remessa.Header["conta"] = 00000
+	remessa.Header["dac"] = 0
+	remessa.Header["nome_empresa"] = "0"
+	remessa.Header["data_geracao"] = 00000000
+	remessa.Header["hora_geracao"] = 000000
+	remessa.Header["numero_sequencial_arquivo_retorno"] = 000000
+
+	lote := remessa.NovoLote(1)
+
+	lote.Header["lote_servico"] = 0000
+	lote.Header["tipo_inscricao"] = 0
+	lote.Header["inscricao_empresa"] = 000000000000000
+	lote.Header["agencia"] = 0000
+	lote.Header["conta"] = 00000
+	lote.Header["dac"] = 0
+	lote.Header["nome_empresa"] = "0"
+	lote.Header["numero_sequencial_arquivo_retorno"] = 00000000
+	lote.Header["data_gravacao"] = 00000000
+	lote.Header["data_credito"] = 00000000
+
+	detalhe := lote.NovoDetalhe()
+
+	detalhe["segmento_p"]["lote_servico"] = 0000
+	detalhe["segmento_p"]["numero_sequencial_registro_lote"] = 00000
+	detalhe["segmento_p"]["codigo_ocorrencia"] = 00
+	detalhe["segmento_p"]["agencia"] = 0000
+	detalhe["segmento_p"]["conta"] = 00000
+	detalhe["segmento_p"]["dac"] = 0
+	detalhe["segmento_p"]["carteira"] = 000
+	detalhe["segmento_p"]["nosso_numero"] = 00000000
+	detalhe["segmento_p"]["dac_nosso_numero"] = 0
+	detalhe["segmento_p"]["numero_documento"] = "0"
+	detalhe["segmento_p"]["vencimento"] = 00000000
+	detalhe["segmento_p"]["valor_titulo"] = 000000000000000
+	detalhe["segmento_p"]["dac_agencia_cobradora"] = 0
+	detalhe["segmento_p"]["especie"] = 00
+	detalhe["segmento_p"]["data_emissao"] = 00000000
+	detalhe["segmento_p"]["data_juros_mora"] = 00000000
+	detalhe["segmento_p"]["juros_1_dia"] = 000000000000000
+	detalhe["segmento_p"]["data_1o_desconto"] = 00000000
+	detalhe["segmento_p"]["valor_1o_desconto"] = 000000000000000
+	detalhe["segmento_p"]["valor_iof"] = 000000000000000
+	detalhe["segmento_p"]["valor_abatimento"] = 000000000000000
+	detalhe["segmento_p"]["identificacao_titulo_empresa"] = "0"
+	detalhe["segmento_p"]["codigo_negativacao_protesto"] = 0
+	detalhe["segmento_p"]["prazo_negativacao_protesto"] = 00
+	detalhe["segmento_p"]["codigo_baixa"] = 0
+	detalhe["segmento_p"]["prazo_baixa"] = 00
+
+	detalhe["segmento_q"]["lote_servico"] = 0000
+	detalhe["segmento_q"]["numero_sequencial_registro_lote"] = 00000
+	detalhe["segmento_q"]["codigo_ocorrencia"] = 00
+	detalhe["segmento_q"]["tipo_inscricao"] = 0
+	detalhe["segmento_q"]["inscricao_numero"] = 000000000000000
+	detalhe["segmento_q"]["nome_pagador"] = "0"
+	detalhe["segmento_q"]["logradouro"] = "0"
+	detalhe["segmento_q"]["bairro"] = "0"
+	detalhe["segmento_q"]["cep"] = 00000
+	detalhe["segmento_q"]["sufixo_cep"] = 000
+	detalhe["segmento_q"]["cidade"] = "0"
+	detalhe["segmento_q"]["uf"] = "0"
+	detalhe["segmento_q"]["tipo_inscricao_sacador"] = 0
+	detalhe["segmento_q"]["inscricao_sacador"] = 000000000000000
+	detalhe["segmento_q"]["nome_sacador"] = "0"
+
+	detalhe["segmento_r"]["codigo_banco"] = 000
+	detalhe["segmento_r"]["lote_servico"] = 0000
+	detalhe["segmento_r"]["tipo_registro"] = 0
+	detalhe["segmento_r"]["numero_sequencial_registro_lote"] = 00000
+	detalhe["segmento_r"]["segmento"] = "0"
+	detalhe["segmento_r"]["brancos_01"] = "0"
+	detalhe["segmento_r"]["codigo_ocorrencia"] = 00
+	detalhe["segmento_r"]["zeros_01"] = 0
+	detalhe["segmento_r"]["valor_2o_desconto"] = 000000000000000
+	detalhe["segmento_r"]["zeros_02"] = 0
+	detalhe["segmento_r"]["data_3o_desconto"] = 00000000
+	detalhe["segmento_r"]["valor_3o_desconto"] = 000000000000000
+	detalhe["segmento_r"]["codigo_multa"] = 0
+	detalhe["segmento_r"]["data_multa"] = "0"
+	detalhe["segmento_r"]["multa"] = "0"
+	detalhe["segmento_r"]["brancos_02"] = "0"
+	detalhe["segmento_r"]["informacoes_pagador"] = "0"
+	detalhe["segmento_r"]["brancos_03"] = "0"
+	detalhe["segmento_r"]["codigo_ocorrencia_pagador"] = 00000000
+	detalhe["segmento_r"]["zeros_03"] = 00000000
+	detalhe["segmento_r"]["brancos_04"] = "0"
+	detalhe["segmento_r"]["zeros_04"] = 000000000000
+	detalhe["segmento_r"]["brancos_05"] = "0"
+	detalhe["segmento_r"]["zeros_05"] = 0
+	detalhe["segmento_r"]["brancos_06"] = "0"
+
+	detalhe["segmento_y"]["lote_servico"] = 0000
+	detalhe["segmento_y"]["numero_sequencial_registro_lote"] = 00000
+	detalhe["segmento_y"]["tipo_inscricao"] = 0
+	detalhe["segmento_y"]["inscricao_numero"] = 000000000000000
+	detalhe["segmento_y"]["nome_sacador"] = "0"
+	detalhe["segmento_y"]["endereco_sacador"] = "0"
+	detalhe["segmento_y"]["bairro_sacador"] = "0"
+	detalhe["segmento_y"]["cep_sacador"] = 00000000
+	detalhe["segmento_y"]["cidade_sacador"] = "0"
+	detalhe["segmento_y"]["uf_sacador"] = "0"
+
+	lote.InserirDetalhe(detalhe)
+
+	lote.Trailer["lote_servico"] = 0000
+	lote.Trailer["quantidade_registros_lote"] = 000000
+	lote.Trailer["quantidade_cobranca_simples"] = 000000
+	lote.Trailer["valor_total_cobranca_simples"] = 00000000000000000
+	lote.Trailer["quantidade_cobranca_vinculada"] = 000000
+	lote.Trailer["valor_total_cobranca_vinculada"] = 00000000000000000
+
+	remessa.InserirLote(lote)
+
+	remessa.Trailer["total_lotes"] = remessa.TotalLotes()
+	remessa.Trailer["total_registros"] = remessa.TotalRegistros()
+
+	remessaFile := file.NewRemessaFile(remessa, "itau-cobranca-cnab240.rem")
+
+	arquivo := remessaFile.Write()
+
+	assert.Nil(t, err)
+	assert.NotNil(t, layout)
+	assert.NotNil(t, remessa)
+	assert.NotNil(t, arquivo)
+	assertFile(t, 8, arquivo.Name(), true)
 }

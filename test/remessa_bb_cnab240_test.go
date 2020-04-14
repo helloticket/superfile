@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/helderfarias/cnab-go"
+	"github.com/helderfarias/cnab-go/file"
 	"github.com/helderfarias/cnab-go/layout/bb"
-	"github.com/helderfarias/cnab-go/output"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -153,7 +153,7 @@ func TestRemessaBBCnab240Cobranca(t *testing.T) {
 	remessa.Trailer["quantidade_registros_arquivo"] = remessa.TotalRegistros()
 	remessa.Trailer["quantidade_contas_conciliacao_lotes"] = 1
 
-	remessaFile := output.NewRemessaFile(remessa, "bb-cobranca-cnab240.rem")
+	remessaFile := file.NewRemessaFile(remessa, "bb-cobranca-cnab240.rem")
 
 	arquivo := remessaFile.Write()
 
@@ -259,7 +259,7 @@ func TestRemessaBBCnab240Pagamento(t *testing.T) {
 	remessa.Trailer["quantidade_lotes_arquivo"] = 000000
 	remessa.Trailer["quantidade_registros_arquivo"] = 000000
 
-	remessaFile := output.NewRemessaFile(remessa, "bb-pagamentos-cnab240.rem")
+	remessaFile := file.NewRemessaFile(remessa, "bb-pagamentos-cnab240.rem")
 
 	arquivo := remessaFile.Write()
 

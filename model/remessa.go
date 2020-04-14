@@ -46,6 +46,10 @@ func (r *Remessa) GetRemessaLayout() map[interface{}]interface{} {
 	return r.layout.GetRemessaLayout()
 }
 
+func (r *Remessa) GetRetornoLayout() map[interface{}]interface{} {
+	return r.layout.GetRetornoLayout()
+}
+
 func (r *Remessa) TamanhoRegistro() int64 {
 	return r.layout.GetTamanhoRegistro()
 }

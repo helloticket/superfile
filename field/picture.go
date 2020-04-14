@@ -3,6 +3,7 @@ package field
 import (
 	"fmt"
 	"math"
+	"math/big"
 	"regexp"
 	"strconv"
 	"strings"
@@ -13,6 +14,8 @@ import (
 
 type Picture interface {
 	Encode(target interface{}, format string, opts Options) (string, error)
+
+	Decode(target string, format string, opts Options) (interface{}, error)
 }
 
 type picture struct {
@@ -35,8 +38,79 @@ func NewPicture() Picture {
 	return &picture{}
 }
 
-func (p *picture) Encode(target interface{}, format string, opts Options) (string, error) {
-	match, err := p.createPattern(format)
+func (p *picture) Decode(target string, pic string, opts Options) (interface{}, error) {
+	match, err := p.createPattern(pic)
+	if err != nil {
+		panic(err)
+	}
+
+	if strings.TrimSpace(target) == "" {
+		return nil, nil
+	}
+
+	if match["tipo1"] == "X" && match["tipo2"] == "" {
+		return strings.TrimSpace(target), nil
+	}
+
+	if match["tipo1"] == "9" && match["tipo2"] == "" {
+		if opts["data_format"] != "" {
+			date, err := time.Parse(dateFormat[opts["data_format"]], strings.TrimSpace(target))
+			if err != nil {
+				return nil, err
+			}
+			return date, nil
+		}
+
+		size, err := helper.ToInt(match["tamanho1"])
+		if err != nil {
+			return "", err
+		}
+
+		i := big.NewInt(int64(size))
+		i.SetString(target, 10)
+		return i.Int64(), nil
+	}
+
+	if match["tipo1"] == "9" && match["tipo2"] == "V9" {
+		leftSize, err := helper.ToInt(match["tamanho1"])
+		if err != nil {
+			return nil, err
+		}
+
+		rightSize, err := helper.ToInt(match["tamanho2"])
+		if err != nil {
+			return nil, err
+		}
+
+		value := target
+
+		size := leftSize + rightSize
+		if size > len(target) {
+			value = helper.LeftPad(target, "0", size)
+		}
+
+		valorLeft := big.NewFloat(float64(leftSize))
+		valorLeft.SetString(value[0:leftSize])
+
+		valorRight := big.NewFloat(float64(rightSize))
+		valorRight.SetString(value[leftSize:])
+
+		if calc, _ := valorRight.Float64(); calc > 0 {
+			i := new(big.Float)
+			i.SetString(fmt.Sprintf("%s.%s", value[0:leftSize], value[leftSize:]))
+			total, _ := i.Float64()
+			return total, nil
+		}
+
+		total, _ := valorLeft.Float64()
+		return total, nil
+	}
+
+	return nil, nil
+}
+
+func (p *picture) Encode(target interface{}, pic string, opts Options) (string, error) {
+	match, err := p.createPattern(pic)
 	if err != nil {
 		panic(err)
 	}
@@ -82,21 +156,11 @@ func (p *picture) Encode(target interface{}, format string, opts Options) (strin
 		}
 
 		if size == 8 {
-			size, err := helper.ToInt(match["tamanho1"])
-			if err != nil {
-				return "", err
-			}
-
 			value := date.Format(dateFormat["dmY"])
 			return helper.LeftPad(value, "0", size), nil
 		}
 
 		if size == 6 {
-			size, err := helper.ToInt(match["tamanho1"])
-			if err != nil {
-				return "", err
-			}
-
 			value := date.Format(dateFormat["dmy"])
 			return helper.LeftPad(value, "0", size), nil
 		}

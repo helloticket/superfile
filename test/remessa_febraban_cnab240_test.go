@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/helderfarias/cnab-go"
+	"github.com/helderfarias/cnab-go/file"
 	"github.com/helderfarias/cnab-go/layout/febraban"
-	"github.com/helderfarias/cnab-go/output"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -152,7 +152,7 @@ func TestRemessaCnab240Pagamentos(t *testing.T) {
 	remessa.Trailer["quantidade_registros_arquivo"] = remessa.TotalRegistros()
 	remessa.Trailer["quantidade_contas_conciliacao_lotes"] = 1
 
-	remessaFile := output.NewRemessaFile(remessa, "febraban-pagamento-cnab240.rem")
+	remessaFile := file.NewRemessaFile(remessa, "febraban-pagamento-cnab240.rem")
 
 	arquivo := remessaFile.Write()
 
