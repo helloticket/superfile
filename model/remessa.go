@@ -20,7 +20,18 @@ func (r *Remessa) InserirLote(l *Lote) {
 	r.Lotes = append(r.Lotes, l)
 }
 
-func (r *Remessa) NovoLote(sequencial int64) *Lote {
+func (r *Remessa) NovoLote() *Lote {
+	return &Lote{
+		Header:        map[string]interface{}{},
+		Trailer:       map[string]interface{}{},
+		Sequencial:    int64(len(r.Lotes) + 1),
+		layout:        r.layout,
+		detalhes:      []Detalhe{},
+		SegmentoVazio: false,
+	}
+}
+
+func (r *Remessa) NovoLoteWith(sequencial int64) *Lote {
 	return &Lote{
 		Header:        map[string]interface{}{},
 		Trailer:       map[string]interface{}{},

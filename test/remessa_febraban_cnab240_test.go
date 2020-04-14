@@ -34,7 +34,7 @@ func TestRemessaCnab240Pagamentos(t *testing.T) {
 	remessa.Header["densidade_gravacao_arquivo"] = 12345
 	remessa.Header["reservado_empresa_01"] = "PRODUCAO"
 
-	lote := remessa.NovoLote(1)
+	lote := remessa.NovoLote()
 
 	lote.Header["codigo_banco"] = 341
 	lote.Header["lote_servico"] = lote.Sequencial

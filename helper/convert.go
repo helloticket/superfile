@@ -33,6 +33,11 @@ func FormatNumber(target interface{}) (string, error) {
 	return fmt.Sprintf("%d", v), err
 }
 
+func ToSafeInt(value interface{}) int {
+	v, _ := ToInt(value)
+	return v
+}
+
 func ToInt(value interface{}) (int, error) {
 	if value == nil {
 		return 0, nil

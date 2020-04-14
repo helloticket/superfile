@@ -2,6 +2,7 @@ package model
 
 import (
 	"sort"
+	"strings"
 )
 
 type Lote struct {
@@ -43,14 +44,27 @@ func (l *Lote) Segmentos() []Segmento {
 
 	sort.Strings(keys)
 
-	segmentos := []Segmento{}
+	preSegmentos := []Segmento{}
 	for _, key := range keys {
-		if l.SegmentoVazio {
-			segmentos = append(segmentos, records[key])
+		if len(records[key].Valores) == 0 && !l.SegmentoVazio {
+			continue
+		}
+
+		preSegmentos = append(preSegmentos, records[key])
+	}
+
+	segmentos := []Segmento{}
+
+	for _, p := range preSegmentos {
+		nomes := strings.Split(p.Nome, ".")
+
+		if len(nomes) == 1 {
+			segmentos = append(segmentos, p)
 		} else {
-			if len(records[key].Valores) > 0 {
-				segmentos = append(segmentos, records[key])
-			}
+			segmentos = append(segmentos, Segmento{
+				Nome:    nomes[1],
+				Valores: p.Valores,
+			})
 		}
 	}
 

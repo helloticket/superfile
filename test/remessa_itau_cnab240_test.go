@@ -25,7 +25,7 @@ func TestRemessaItauCnab240Pagamento(t *testing.T) {
 	remessa.Header["data_geracao"] = 00000000
 	remessa.Header["hora_geracao"] = 000000
 
-	lote := remessa.NovoLote(1)
+	lote := remessa.NovoLote()
 
 	lote.Header["codigo_lote"] = 0000
 	lote.Header["tipo_pagamento"] = 00
@@ -177,7 +177,7 @@ func TestRemessaItauCnab240Cobranca(t *testing.T) {
 	remessa.Header["hora_geracao"] = 000000
 	remessa.Header["numero_sequencial_arquivo_retorno"] = 000000
 
-	lote := remessa.NovoLote(1)
+	lote := remessa.NovoLote()
 
 	lote.Header["lote_servico"] = 0000
 	lote.Header["tipo_inscricao"] = 0

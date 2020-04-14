@@ -34,7 +34,7 @@ func TestRemessaBBCnab240Cobranca(t *testing.T) {
 	remessa.Header["hora_geracao_arquivo"] = time.Date(2017, 5, 10, 0, 0, 0, 0, time.UTC)
 	remessa.Header["numero_sequencial_arquivo"] = 000000
 
-	lote := remessa.NovoLote(1)
+	lote := remessa.NovoLote()
 
 	lote.Header["lote_servico"] = lote.Sequencial
 	lote.Header["tipo_inscricao_empresa"] = 2
@@ -186,7 +186,7 @@ func TestRemessaBBCnab240Pagamento(t *testing.T) {
 	remessa.Header["hora_geracao_arquivo"] = 000000
 	remessa.Header["numero_sequencial_arquivo"] = 000000
 
-	lote := remessa.NovoLote(1)
+	lote := remessa.NovoLote()
 
 	lote.Header["lote_servico"] = 0000
 	lote.Header["tipo_servico"] = 00
