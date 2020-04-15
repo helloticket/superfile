@@ -97,11 +97,11 @@ go get github.com/helderfarias/cnab-go
 
 ```go
   source := strings.NewReader(itau.CNAB240Cobranca)
-	layout, err := cnab.NewLayout("240", source)
+  layout, err := cnab.NewLayout("240", source)
 
-	f, _ := os.Open("cobranca_itau_cnab240.ret")
-	defer f.Close()
-	arquivo, err := file.NewRetornoFile(layout, f)
+  f, _ := os.Open("cobranca_itau_cnab240.ret")
+  defer f.Close()
+  arquivo, err := file.NewRetornoFile(layout, f)
   retorno := arquivo.Read()
   log.Println(retorno)
 ```
