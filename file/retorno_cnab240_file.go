@@ -10,27 +10,19 @@ import (
 	"github.com/helderfarias/cnab-go/model"
 )
 
-const registroHeaderArquivo = 0
-const registroHeaderLote = 1
-const registroDetalhes = 3
-const registroTrailerLote = 5
-const registroTrailerArquivo = 9
-
-type RetornoFile struct {
+type retornoCNAB240File struct {
 	content io.Reader
 	layout  model.Layout
 	decoder *Decoder
 }
 
-func NewRetornoFile(layout model.Layout, content io.Reader) (*RetornoFile, error) {
-	return &RetornoFile{
-		layout:  layout,
-		content: content,
-		decoder: NewDecoder(),
-	}, nil
-}
+func (r *retornoCNAB240File) Read() *model.Retorno {
+	const registroHeaderArquivo = 0
+	const registroHeaderLote = 1
+	const registroDetalhes = 3
+	const registroTrailerLote = 5
+	const registroTrailerArquivo = 9
 
-func (r *RetornoFile) Read() *model.Retorno {
 	numeroLote := int64(0)
 	numeroSegmentos := int64(0)
 	retorno := model.NewRetorno(r.layout)
@@ -76,7 +68,7 @@ func (r *RetornoFile) Read() *model.Retorno {
 	return retorno
 }
 
-func (r *RetornoFile) decodeSegmento(row string) model.Segmento {
+func (r *retornoCNAB240File) decodeSegmento(row string) model.Segmento {
 	segmento := fmt.Sprintf("segmento_%s", strings.ToLower(row[13:14]))
 	layout := r.getLayoutFor("detalhes")
 	layout = layout[segmento].(map[interface{}]interface{})
@@ -95,7 +87,7 @@ func (r *RetornoFile) decodeSegmento(row string) model.Segmento {
 	}
 }
 
-func (r *RetornoFile) decodeLoteTrailer(row string) map[string]interface{} {
+func (r *retornoCNAB240File) decodeLoteTrailer(row string) map[string]interface{} {
 	trailer := map[string]interface{}{}
 
 	linhas := r.decoder.Parse("trailer_lote", row, r.getLayoutFor("trailer_lote"))
@@ -107,7 +99,7 @@ func (r *RetornoFile) decodeLoteTrailer(row string) map[string]interface{} {
 	return trailer
 }
 
-func (r *RetornoFile) decodeLoteHeader(row string) map[string]interface{} {
+func (r *retornoCNAB240File) decodeLoteHeader(row string) map[string]interface{} {
 	header := map[string]interface{}{}
 
 	linhas := r.decoder.Parse("header_lote", row, r.getLayoutFor("header_lote"))
@@ -119,7 +111,7 @@ func (r *RetornoFile) decodeLoteHeader(row string) map[string]interface{} {
 	return header
 }
 
-func (r *RetornoFile) decodeFileHeader(row string) map[string]interface{} {
+func (r *retornoCNAB240File) decodeFileHeader(row string) map[string]interface{} {
 	header := map[string]interface{}{}
 
 	linhas := r.decoder.Parse("header_arquivo", row, r.getLayoutFor("header_arquivo"))
@@ -131,7 +123,7 @@ func (r *RetornoFile) decodeFileHeader(row string) map[string]interface{} {
 	return header
 }
 
-func (r *RetornoFile) decodeFileTrailer(row string) map[string]interface{} {
+func (r *retornoCNAB240File) decodeFileTrailer(row string) map[string]interface{} {
 	trailer := map[string]interface{}{}
 
 	linhas := r.decoder.Parse("trailer_arquivo", row, r.getLayoutFor("trailer_arquivo"))
@@ -143,7 +135,7 @@ func (r *RetornoFile) decodeFileTrailer(row string) map[string]interface{} {
 	return trailer
 }
 
-func (r *RetornoFile) getLayoutFor(name string) map[interface{}]interface{} {
+func (r *retornoCNAB240File) getLayoutFor(name string) map[interface{}]interface{} {
 	config := r.layout.GetRetornoLayout()
 	return config[name].(map[interface{}]interface{})
 }

@@ -20,4 +20,6 @@ type Layout interface {
 	GetLayout() string
 
 	GetTamanhoRegistro() int64
+
+	Validate() error
 }

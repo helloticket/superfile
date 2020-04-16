@@ -7,21 +7,13 @@ import (
 	"github.com/helderfarias/cnab-go/model"
 )
 
-type RemessaFile struct {
+type remessaCNAB240File struct {
 	model    *model.Remessa
 	fileName string
 	encoder  *Encoder
 }
 
-func NewRemessaFile(remessa *model.Remessa, fileName string) *RemessaFile {
-	return &RemessaFile{
-		model:    remessa,
-		fileName: fileName,
-		encoder:  NewEncoder(remessa),
-	}
-}
-
-func (w *RemessaFile) Write() *os.File {
+func (w *remessaCNAB240File) Write() *os.File {
 	file, err := os.Create(w.fileName)
 	if err != nil {
 		panic(err)
@@ -45,7 +37,7 @@ func (w *RemessaFile) Write() *os.File {
 	return file
 }
 
-func (w *RemessaFile) encodeLotes() []string {
+func (w *remessaCNAB240File) encodeLotes() []string {
 	encoded := []string{}
 
 	for _, lote := range w.model.Lotes {
@@ -67,19 +59,19 @@ func (w *RemessaFile) encodeLotes() []string {
 	return encoded
 }
 
-func (w *RemessaFile) encodeFileHeader() string {
+func (w *remessaCNAB240File) encodeFileHeader() string {
 	config := w.model.GetRemessaLayout()
 	layout := config["header_arquivo"].(map[interface{}]interface{})
 	return w.encoder.ParseAndEncode("header_arquivo", w.model.Header, layout)
 }
 
-func (w *RemessaFile) encodeFileTrailer() string {
+func (w *remessaCNAB240File) encodeFileTrailer() string {
 	config := w.model.GetRemessaLayout()
 	layout := config["trailer_arquivo"].(map[interface{}]interface{})
 	return w.encoder.ParseAndEncode("trailer_arquivo", w.model.Trailer, layout)
 }
 
-func (w *RemessaFile) getLayoutFor(name string) map[interface{}]interface{} {
+func (w *remessaCNAB240File) getLayoutFor(name string) map[interface{}]interface{} {
 	config := w.model.GetRemessaLayout()
 	return config[name].(map[interface{}]interface{})
 }

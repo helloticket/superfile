@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"errors"
 	"strings"
 
 	"github.com/helderfarias/cnab-go/model"
@@ -11,9 +12,18 @@ type ModeloLayout struct {
 	definitions model.RecordDetailMap
 }
 
-func NewModeloLayout(config model.FileConfigMap) *ModeloLayout {
-	cache := model.RecordDetailMap{}
+func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
+	if len(config) == 0 {
+		return nil, errors.New("Arquivo de definição de layout vazio")
+	}
 
+	layout := config["layout"]
+	if model.LayoutCNAB400 != layout &&
+		model.LayoutCNAB240 != layout {
+		return nil, errors.New("Arquivo de definição de layout vazio")
+	}
+
+	cache := model.RecordDetailMap{}
 	if value, ok := config["remessa"]; ok {
 		cache = carregarDetalhes(value.(map[interface{}]interface{}))
 	}
@@ -21,7 +31,21 @@ func NewModeloLayout(config model.FileConfigMap) *ModeloLayout {
 	return &ModeloLayout{
 		config:      config,
 		definitions: cache,
+	}, nil
+}
+
+func (l *ModeloLayout) Validate() error {
+	if len(l.config) == 0 {
+		return errors.New("Arquivo de definição de layout vazio")
 	}
+
+	layout := l.config["layout"]
+	if model.LayoutCNAB400 != layout &&
+		model.LayoutCNAB240 != layout {
+		return errors.New("Arquivo de definição de layout vazio")
+	}
+
+	return nil
 }
 
 func (l *ModeloLayout) GetSegmentoDefinitions() model.RecordDetailMap {
@@ -45,15 +69,24 @@ func (l *ModeloLayout) GetRetornoLayout() model.FileConfigMap {
 }
 
 func (l *ModeloLayout) GetVersao() string {
-	return l.config["versao"].(string)
+	if value, ok := l.config["versao"].(string); ok {
+		return strings.ToLower(value)
+	}
+	return ""
 }
 
 func (l *ModeloLayout) GetServico() string {
-	return l.config["servico"].(string)
+	if value, ok := l.config["servico"].(string); ok {
+		return value
+	}
+	return ""
 }
 
 func (l *ModeloLayout) GetLayout() string {
-	return l.config["layout"].(string)
+	if value, ok := l.config["layout"].(string); ok {
+		return value
+	}
+	return ""
 }
 
 func (l *ModeloLayout) GetTamanhoRegistro() int64 {
@@ -62,11 +95,11 @@ func (l *ModeloLayout) GetTamanhoRegistro() int64 {
 		panic("Atributo 'layout' não definido no modelo")
 	}
 
-	if "cnab240" == strings.ToLower(layout) {
+	if model.LayoutCNAB240 == strings.ToLower(layout) {
 		return 240
 	}
 
-	if "cnab400" == strings.ToLower(layout) {
+	if model.LayoutCNAB400 == strings.ToLower(layout) {
 		return 400
 	}
 

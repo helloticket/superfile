@@ -58,3 +58,15 @@ func (r *Retorno) TotalRegistros() int64 {
 
 	return int64(totalHeaderLote + totalSegmentosLote + totalTrailerLote)
 }
+
+func (l *Retorno) Segmentos() []Segmento {
+	segmentos := []Segmento{}
+
+	for _, l := range l.Lotes {
+		for _, s := range l.Segmentos() {
+			segmentos = append(segmentos, s)
+		}
+	}
+
+	return segmentos
+}

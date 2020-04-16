@@ -15,7 +15,7 @@ func TestRetornoItauCnab240Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB240Cobranca)
 	layout, err := cnab.NewLayout("240", source)
 
-	f, _ := os.Open("cobranca_itau_cnab240.ret")
+	f, _ := os.Open("fixtures/cobranca_itau_cnab240.ret")
 	defer f.Close()
 	arquivo, err := file.NewRetornoFile(layout, f)
 	retorno := arquivo.Read()
