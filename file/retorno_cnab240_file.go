@@ -36,24 +36,24 @@ func (r *retornoCNAB240File) Read() *model.Retorno {
 		tipoRegistro := helper.ToSafeInt(linha[7:8])
 
 		if registroHeaderArquivo == tipoRegistro {
-			retorno.Header = r.decodeFileHeader(reader.Text())
+			retorno.Header = r.decodeFileHeader(linha)
 		}
 
 		if registroHeaderLote == tipoRegistro {
 			numeroLote++
 			loteCorrente = retorno.NovoLote(numeroLote)
 			detalheCorrente = loteCorrente.NovoDetalhe()
-			loteCorrente.Header = r.decodeLoteHeader(reader.Text())
+			loteCorrente.Header = r.decodeLoteHeader(linha)
 		}
 
 		if registroDetalhes == tipoRegistro {
 			numeroSegmentos++
-			segmento := r.decodeSegmento(reader.Text())
+			segmento := r.decodeSegmento(linha)
 			detalheCorrente[fmt.Sprintf("%d.%s", numeroSegmentos, segmento.Nome)] = segmento.Valores
 		}
 
 		if registroTrailerLote == tipoRegistro {
-			loteCorrente.Trailer = r.decodeLoteTrailer(reader.Text())
+			loteCorrente.Trailer = r.decodeLoteTrailer(linha)
 			loteCorrente.InserirDetalhe(detalheCorrente)
 			retorno.InserirLote(loteCorrente)
 			loteCorrente = nil

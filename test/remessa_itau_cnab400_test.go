@@ -12,7 +12,7 @@ import (
 
 func TestRemessaItauCnab400Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB400Cobranca)
-	layout, err := cnab.NewLayout("400", source)
+	layout, err := cnab.NewLayout(source)
 
 	remessa := cnab.NewRemessa(layout)
 	remessa.Header["agencia"] = 0000
@@ -75,5 +75,5 @@ func TestRemessaItauCnab400Cobranca(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	assertFile(t, 3, arquivo.Name(), false)
+	assertFile(t, 3, arquivo.Name(), true)
 }

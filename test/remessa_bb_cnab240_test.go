@@ -13,7 +13,7 @@ import (
 
 func TestRemessaBBCnab240Cobranca(t *testing.T) {
 	source := strings.NewReader(bb.CNAB240Cobranca)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 	remessa := cnab.NewRemessa(layout)
 
 	remessa.Header["tipo_inscricao_empresa"] = 0
@@ -166,7 +166,7 @@ func TestRemessaBBCnab240Cobranca(t *testing.T) {
 
 func TestRemessaBBCnab240Pagamento(t *testing.T) {
 	source := strings.NewReader(bb.CNAB240Pagamentos)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 	remessa := cnab.NewRemessa(layout)
 
 	remessa.Header["codigo_banco"] = 000

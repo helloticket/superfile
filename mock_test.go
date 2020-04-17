@@ -32,3 +32,7 @@ func (l *LayoutFake) GetLayout() string {
 func (l *LayoutFake) GetTamanhoRegistro() int64 {
 	return 0
 }
+
+func (l *LayoutFake) Validate() error {
+	return nil
+}

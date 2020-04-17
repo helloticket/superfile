@@ -13,7 +13,7 @@ import (
 
 func TestRemessaCnab240Pagamentos(t *testing.T) {
 	source := strings.NewReader(febraban.CNAB240Pagamentos)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 	remessa := cnab.NewRemessa(layout)
 
 	remessa.Header["codigo_banco"] = 341

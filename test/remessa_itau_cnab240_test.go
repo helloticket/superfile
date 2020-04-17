@@ -12,7 +12,7 @@ import (
 
 func TestRemessaItauCnab240Pagamento(t *testing.T) {
 	source := strings.NewReader(itau.CNAB240Pagamentos)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 	remessa := cnab.NewRemessa(layout)
 
 	remessa.Header["tipo_inscricao"] = 0
@@ -164,7 +164,7 @@ func TestRemessaItauCnab240Pagamento(t *testing.T) {
 
 func TestRemessaItauCnab240Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB240Cobranca)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 	remessa := cnab.NewRemessa(layout)
 
 	remessa.Header["tipo_inscricao"] = 0

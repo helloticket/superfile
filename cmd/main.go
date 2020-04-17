@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/file"
 	"github.com/helderfarias/cnab-go/layout/itau"
 	"github.com/helderfarias/cnab-go/model"
 )
@@ -18,6 +17,6 @@ func main() {
 	}
 
 	remessa := cnab.NewRemessa(layout)
-	debug := file.NewRemessaDebug(remessa)
+	debug := cnab.NewRemessaDebug(remessa)
 	debug.Write()
 }

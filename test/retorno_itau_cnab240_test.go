@@ -6,18 +6,17 @@ import (
 	"testing"
 
 	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/file"
 	"github.com/helderfarias/cnab-go/layout/itau"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRetornoItauCnab240Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB240Cobranca)
-	layout, err := cnab.NewLayout("240", source)
+	layout, err := cnab.NewLayout(source)
 
 	f, _ := os.Open("fixtures/cobranca_itau_cnab240.ret")
 	defer f.Close()
-	arquivo, err := file.NewRetornoFile(layout, f)
+	arquivo, err := cnab.NewRetornoFile(layout, f)
 	retorno := arquivo.Read()
 
 	assert.Nil(t, err)

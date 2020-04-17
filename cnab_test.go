@@ -8,7 +8,7 @@ import (
 )
 
 func TestCriarLayoutInvalido(t *testing.T) {
-	layout, err := NewLayout("240", strings.NewReader(""))
+	layout, err := NewLayout(strings.NewReader(""))
 
 	assert.NotNil(t, err)
 	assert.Nil(t, layout)
