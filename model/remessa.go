@@ -53,6 +53,10 @@ func (r *Remessa) NovoLoteSegmentoVazio(sequencial int64) *Lote {
 	}
 }
 
+func (r *Remessa) GetLayout() string {
+	return r.layout.GetLayout()
+}
+
 func (r *Remessa) GetRemessaLayout() map[interface{}]interface{} {
 	return r.layout.GetRemessaLayout()
 }

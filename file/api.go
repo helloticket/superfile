@@ -17,6 +17,14 @@ type RemessaFile interface {
 }
 
 func NewRemessaFile(remessa *model.Remessa, fileName string) RemessaFile {
+	if remessa.GetLayout() == model.LayoutCNAB400 {
+		return &remessaCNAB400File{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
 	return &remessaCNAB240File{
 		model:    remessa,
 		fileName: fileName,

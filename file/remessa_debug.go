@@ -38,8 +38,11 @@ func (w *RemessaDebug) encodeFileHeader() {
 func (w *RemessaDebug) encodeLotes() {
 	fmt.Println()
 	lote := w.model.NovoLoteSegmentoVazio(1)
-	headerEncoded := w.encoder.Parse("header_lote", lote.Header, w.getLayoutFor("header_lote"))
-	w.output("lote.Header", headerEncoded)
+
+	if w.model.GetLayout() == model.LayoutCNAB240 {
+		headerEncoded := w.encoder.Parse("header_lote", lote.Header, w.getLayoutFor("header_lote"))
+		w.output("lote.Header", headerEncoded)
+	}
 
 	fmt.Println()
 	lote.InserirDetalhe(lote.NovoDetalhe())
@@ -53,8 +56,11 @@ func (w *RemessaDebug) encodeLotes() {
 	}
 
 	fmt.Println()
-	trailerEncoded := w.encoder.Parse("trailer_lote", lote.Trailer, w.getLayoutFor("trailer_lote"))
-	w.output("lote.Trailer", trailerEncoded)
+
+	if w.model.GetLayout() == model.LayoutCNAB240 {
+		trailerEncoded := w.encoder.Parse("trailer_lote", lote.Trailer, w.getLayoutFor("trailer_lote"))
+		w.output("lote.Trailer", trailerEncoded)
+	}
 }
 
 func (w *RemessaDebug) encodeFileTrailer() {

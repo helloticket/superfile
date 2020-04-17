@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/helderfarias/cnab-go/helper"
 	"github.com/helderfarias/cnab-go/model"
 )
 
@@ -17,7 +18,7 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 		return nil, errors.New("Arquivo de definição de layout vazio")
 	}
 
-	layout := config["layout"]
+	layout := helper.ToString(config["layout"])
 	if model.LayoutCNAB400 != layout &&
 		model.LayoutCNAB240 != layout {
 		return nil, errors.New("Arquivo de definição de layout vazio")
@@ -39,7 +40,7 @@ func (l *ModeloLayout) Validate() error {
 		return errors.New("Arquivo de definição de layout vazio")
 	}
 
-	layout := l.config["layout"]
+	layout := helper.ToString(l.config["layout"])
 	if model.LayoutCNAB400 != layout &&
 		model.LayoutCNAB240 != layout {
 		return errors.New("Arquivo de definição de layout vazio")
@@ -84,7 +85,7 @@ func (l *ModeloLayout) GetServico() string {
 
 func (l *ModeloLayout) GetLayout() string {
 	if value, ok := l.config["layout"].(string); ok {
-		return value
+		return strings.ToLower(value)
 	}
 	return ""
 }

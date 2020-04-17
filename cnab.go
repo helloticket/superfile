@@ -26,10 +26,14 @@ func NewLayout(versao string, modelo *strings.Reader) (model.Layout, error) {
 		return nil, err
 	}
 
-	esperado := fmt.Sprintf("cnab%s", versao)
+	esperado := strings.ToLower(versao)
+	if !strings.HasPrefix(esperado, "cnab") {
+		esperado = fmt.Sprintf("cnab%s", versao)
+	}
+
 	retornado := layout.GetLayout()
 	if esperado != retornado {
-		return nil, fmt.Errorf("Versão do layout não compativel. Esperado %s mas foi %s", versao, retornado)
+		return nil, fmt.Errorf("Versão do layout não compativel. Esperado %s mas foi %s", versao, esperado)
 	}
 
 	return layout, err
