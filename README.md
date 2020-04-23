@@ -5,7 +5,7 @@ Parser de arquivos de configuração cnab e outros layouts.
 ## Instalação
 
 ```bash
-go get github.com/helderfarias/cnab-go
+go get github.com/helderfarias/superfile
 ```
 
 ## Debug de layout
@@ -18,8 +18,8 @@ go get github.com/helderfarias/cnab-go
 
 ```go
   source := strings.NewReader(itau.CNAB240Pagamentos)
-  layout, err := cnab.NewLayout(source)
-  remessa := cnab.NewRemessa(layout)
+  layout, err := superfile.NewLayout(source)
+  remessa := superfile.NewRemessa(layout)
 
   remessa.Header["tipo_inscricao"] = 0
   remessa.Header["inscricao_numero"] = 00000000000000
@@ -97,14 +97,15 @@ go get github.com/helderfarias/cnab-go
 
 ```go
   source := strings.NewReader(itau.CNAB240Cobranca)
-  layout, err := cnab.NewLayout(source)
+  layout, err := superfile.NewLayout(source)
 
   f, _ := os.Open("cobranca_itau_cnab240.ret")
   defer f.Close()
-  arquivo, err := cnab.NewRetornoFile(layout, f)
+  arquivo, err := superfile.NewRetornoFile(layout, f)
   retorno := arquivo.Read()
   log.Println(retorno)
 ```
+
 ## Inspirado
 
 Baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-

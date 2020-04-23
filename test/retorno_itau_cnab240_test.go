@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/layout/itau"
+	"github.com/helderfarias/superfile/layout/itau"
 	"github.com/stretchr/testify/assert"
 )
 

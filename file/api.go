@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile/model"
 )
 
 type RetornoFile interface {

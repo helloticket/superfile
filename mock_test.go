@@ -1,6 +1,6 @@
-package cnab
+package superfile
 
-import "github.com/helderfarias/cnab-go/model"
+import "github.com/helderfarias/superfile/model"
 
 type LayoutFake struct {
 }

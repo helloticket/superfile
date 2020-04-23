@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/helderfarias/cnab-go/field"
+	"github.com/helderfarias/superfile/field"
 )
 
 type Linha struct {

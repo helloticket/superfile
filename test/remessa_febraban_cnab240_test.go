@@ -5,16 +5,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/file"
-	"github.com/helderfarias/cnab-go/layout/febraban"
+	"github.com/helderfarias/superfile"
+	"github.com/helderfarias/superfile/file"
+	"github.com/helderfarias/superfile/layout/febraban"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRemessaCnab240Pagamentos(t *testing.T) {
 	source := strings.NewReader(febraban.CNAB240Pagamentos)
-	layout, err := cnab.NewLayout(source)
-	remessa := cnab.NewRemessa(layout)
+	layout, err := superfile.NewLayout(source)
+	remessa := superfile.NewRemessa(layout)
 
 	remessa.Header["codigo_banco"] = 341
 	remessa.Header["tipo_inscricao_empresa"] = 1

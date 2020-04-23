@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/helderfarias/cnab-go/field"
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile/field"
+	"github.com/helderfarias/superfile/model"
 )
 
 type RemessaDebug struct {

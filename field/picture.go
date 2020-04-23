@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/helderfarias/cnab-go/helper"
+	"github.com/helderfarias/superfile/helper"
 )
 
 type Picture interface {

@@ -1,4 +1,4 @@
-package cnab
+package superfile
 
 import (
 	"strings"

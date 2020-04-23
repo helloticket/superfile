@@ -4,17 +4,17 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/file"
-	"github.com/helderfarias/cnab-go/layout/itau"
+	"github.com/helderfarias/superfile"
+	"github.com/helderfarias/superfile/file"
+	"github.com/helderfarias/superfile/layout/itau"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRemessaItauCnab400Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB400Cobranca)
-	layout, err := cnab.NewLayout(source)
+	layout, err := superfile.NewLayout(source)
 
-	remessa := cnab.NewRemessa(layout)
+	remessa := superfile.NewRemessa(layout)
 	remessa.Header["agencia"] = 0000
 	remessa.Header["conta"] = 00000
 	remessa.Header["dac"] = 0

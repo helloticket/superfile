@@ -3,7 +3,7 @@ package parser
 import (
 	"testing"
 
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile/model"
 	"github.com/stretchr/testify/assert"
 )
 

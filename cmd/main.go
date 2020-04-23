@@ -3,20 +3,18 @@ package main
 import (
 	"strings"
 
-	"github.com/helderfarias/cnab-go"
-	"github.com/helderfarias/cnab-go/layout/itau"
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile"
+	"github.com/helderfarias/superfile/layout/itau"
 )
 
 func main() {
 	source := strings.NewReader(itau.CNAB400Cobranca)
-
-	layout, err := cnab.NewLayout(model.LayoutCNAB400, source)
+	layout, err := superfile.NewLayout(source)
 	if err != nil {
 		panic(err)
 	}
 
-	remessa := cnab.NewRemessa(layout)
-	debug := cnab.NewRemessaDebug(remessa)
+	remessa := superfile.NewRemessa(layout)
+	debug := superfile.NewRemessaDebug(remessa)
 	debug.Write()
 }

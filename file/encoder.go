@@ -6,9 +6,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/helderfarias/cnab-go/field"
-	"github.com/helderfarias/cnab-go/helper"
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile/field"
+	"github.com/helderfarias/superfile/helper"
+	"github.com/helderfarias/superfile/model"
 )
 
 type Encoder struct {

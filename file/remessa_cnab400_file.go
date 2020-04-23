@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/helderfarias/cnab-go/model"
+	"github.com/helderfarias/superfile/model"
 )
 
 type remessaCNAB400File struct {

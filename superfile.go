@@ -1,4 +1,4 @@
-package cnab
+package superfile
 
 import (
 	"errors"
@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/helderfarias/cnab-go/file"
-	"github.com/helderfarias/cnab-go/model"
-	"github.com/helderfarias/cnab-go/parser"
+	"github.com/helderfarias/superfile/file"
+	"github.com/helderfarias/superfile/model"
+	"github.com/helderfarias/superfile/parser"
 	"gopkg.in/yaml.v2"
 )
 
@@ -45,4 +45,8 @@ func NewRemessa(data model.Layout) *model.Remessa {
 
 func NewRetornoFile(layout model.Layout, content io.Reader) (file.RetornoFile, error) {
 	return file.NewRetornoFile(layout, content)
+}
+
+func NewRemessaDebug(remessa *model.Remessa) *file.RemessaDebug {
+	return file.NewRemessaDebug(remessa)
 }
