@@ -1,6 +1,6 @@
-# cnab-go
+# superfile
 
-Parser de arquivos de configuração CNAB (layouts) baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-layouts)
+Parser de arquivos de configuração cnab e outros layouts.
 
 ## Instalação
 
@@ -105,3 +105,6 @@ go get github.com/helderfarias/cnab-go
   retorno := arquivo.Read()
   log.Println(retorno)
 ```
+## Inspirado
+
+Baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-
