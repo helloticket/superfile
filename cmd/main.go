@@ -3,8 +3,8 @@ package main
 import (
 	"strings"
 
-	"github.com/helderfarias/superfile"
-	"github.com/helderfarias/superfile/layout/ccsitef"
+	"github.com/helloticket/superfile"
+	"github.com/helloticket/superfile/layout/ccsitef"
 )
 
 func main() {

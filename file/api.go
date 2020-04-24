@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/model"
 )
 
 type RetornoFile interface {

@@ -3,7 +3,7 @@ package parser
 import (
 	"testing"
 
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/model"
 	"github.com/stretchr/testify/assert"
 )
 

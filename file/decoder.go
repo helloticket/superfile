@@ -3,9 +3,9 @@ package file
 import (
 	"sort"
 
-	"github.com/helderfarias/superfile/field"
-	"github.com/helderfarias/superfile/helper"
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/field"
+	"github.com/helloticket/superfile/helper"
+	"github.com/helloticket/superfile/model"
 )
 
 type Decoder struct {

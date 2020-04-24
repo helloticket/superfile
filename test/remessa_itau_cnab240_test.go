@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/helderfarias/superfile"
-	"github.com/helderfarias/superfile/file"
-	"github.com/helderfarias/superfile/layout/itau"
+	"github.com/helloticket/superfile"
+	"github.com/helloticket/superfile/file"
+	"github.com/helloticket/superfile/layout/itau"
 	"github.com/stretchr/testify/assert"
 )
 

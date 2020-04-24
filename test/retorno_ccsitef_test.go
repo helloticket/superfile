@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/helderfarias/superfile"
-	"github.com/helderfarias/superfile/layout/ccsitef"
+	"github.com/helloticket/superfile"
+	"github.com/helloticket/superfile/layout/ccsitef"
 	"github.com/stretchr/testify/assert"
 )
 

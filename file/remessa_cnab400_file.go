@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/model"
 )
 
 type remessaCNAB400File struct {

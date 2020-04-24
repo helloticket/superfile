@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/helderfarias/superfile"
-	"github.com/helderfarias/superfile/file"
-	"github.com/helderfarias/superfile/layout/febraban"
+	"github.com/helloticket/superfile"
+	"github.com/helloticket/superfile/file"
+	"github.com/helloticket/superfile/layout/febraban"
 	"github.com/stretchr/testify/assert"
 )
 

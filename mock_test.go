@@ -1,6 +1,6 @@
 package superfile
 
-import "github.com/helderfarias/superfile/model"
+import "github.com/helloticket/superfile/model"
 
 type LayoutFake struct {
 }

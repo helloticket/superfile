@@ -6,8 +6,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/helderfarias/superfile/helper"
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/helper"
+	"github.com/helloticket/superfile/model"
 )
 
 type retornoCNAB240File struct {

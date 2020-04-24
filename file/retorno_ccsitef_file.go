@@ -6,7 +6,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/model"
 )
 
 type retornoCCSITEFFile struct {

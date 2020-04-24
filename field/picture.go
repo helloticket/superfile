@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/helderfarias/superfile/helper"
+	"github.com/helloticket/superfile/helper"
 )
 
 type Picture interface {

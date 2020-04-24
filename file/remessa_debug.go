@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/helderfarias/superfile/field"
-	"github.com/helderfarias/superfile/model"
+	"github.com/helloticket/superfile/field"
+	"github.com/helloticket/superfile/model"
 )
 
 type RemessaDebug struct {

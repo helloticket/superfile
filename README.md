@@ -5,7 +5,7 @@ Parser de arquivos de configuração cnab e outros layouts.
 ## Instalação
 
 ```bash
-go get github.com/helderfarias/superfile
+go get github.com/helloticket/superfile
 ```
 
 ## Debug de layout

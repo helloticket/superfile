@@ -6,9 +6,9 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/helderfarias/superfile/file"
-	"github.com/helderfarias/superfile/model"
-	"github.com/helderfarias/superfile/parser"
+	"github.com/helloticket/superfile/file"
+	"github.com/helloticket/superfile/model"
+	"github.com/helloticket/superfile/parser"
 	"gopkg.in/yaml.v2"
 )
 
