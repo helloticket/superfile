@@ -32,6 +32,7 @@ var dateFormat = map[string]string{
 	"dmy":      "020106",
 	"hhmmss":   "150405",
 	"hhmm":     "1504",
+	"yyyymmdd": "20060201",
 }
 
 func NewPicture() Picture {

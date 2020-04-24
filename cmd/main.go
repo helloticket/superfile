@@ -4,11 +4,11 @@ import (
 	"strings"
 
 	"github.com/helderfarias/superfile"
-	"github.com/helderfarias/superfile/layout/itau"
+	"github.com/helderfarias/superfile/layout/ccsitef"
 )
 
 func main() {
-	source := strings.NewReader(itau.CNAB400Cobranca)
+	source := strings.NewReader(ccsitef.ExtratoEletronico)
 	layout, err := superfile.NewLayout(source)
 	if err != nil {
 		panic(err)

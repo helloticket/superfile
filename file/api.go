@@ -25,6 +25,14 @@ func NewRemessaFile(remessa *model.Remessa, fileName string) RemessaFile {
 		}
 	}
 
+	if remessa.GetLayout() == model.LayoutCCSITEF {
+		return &remessaCCSITEFFile{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
 	return &remessaCNAB240File{
 		model:    remessa,
 		fileName: fileName,
@@ -43,6 +51,14 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 
 	if layout.GetLayout() == model.LayoutCNAB400 {
 		return &retornoCNAB400File{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutCCSITEF {
+		return &retornoCCSITEFFile{
 			layout:  layout,
 			content: content,
 			decoder: NewDecoder(),

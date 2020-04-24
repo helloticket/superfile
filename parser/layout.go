@@ -20,7 +20,8 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 
 	layout := helper.ToString(config["layout"])
 	if model.LayoutCNAB400 != layout &&
-		model.LayoutCNAB240 != layout {
+		model.LayoutCNAB240 != layout &&
+		model.LayoutCCSITEF != layout {
 		return nil, errors.New("Arquivo de definição de layout vazio")
 	}
 
@@ -42,7 +43,8 @@ func (l *ModeloLayout) Validate() error {
 
 	layout := helper.ToString(l.config["layout"])
 	if model.LayoutCNAB400 != layout &&
-		model.LayoutCNAB240 != layout {
+		model.LayoutCNAB240 != layout &&
+		model.LayoutCCSITEF != layout {
 		return errors.New("Arquivo de definição de layout vazio")
 	}
 
@@ -104,7 +106,7 @@ func (l *ModeloLayout) GetTamanhoRegistro() int64 {
 		return 400
 	}
 
-	return 240
+	return -1
 }
 
 func carregarDetalhes(remessa model.FileConfigMap) model.RecordDetailMap {

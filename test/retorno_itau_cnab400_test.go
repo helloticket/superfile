@@ -5,21 +5,21 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/helderfarias/cnab-go"
+	"github.com/helderfarias/superfile"
 	"github.com/helderfarias/superfile/layout/itau"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestRetornoItauCnab400Cobranca(t *testing.T) {
 	source := strings.NewReader(itau.CNAB400Cobranca)
-	layout, err := cnab.NewLayout(source)
+	layout, err := superfile.NewLayout(source)
 	assert.Nil(t, err)
 
 	f, err := os.Open("fixtures/cobranca-itau-cnab400.ret")
 	assert.Nil(t, err)
 	defer f.Close()
 
-	arquivo, err := cnab.NewRetornoFile(layout, f)
+	arquivo, err := superfile.NewRetornoFile(layout, f)
 	assert.Nil(t, err)
 
 	retorno := arquivo.Read()

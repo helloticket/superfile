@@ -84,15 +84,17 @@ func (e Encoder) Encode(blockName string, linhas []model.Linha) string {
 		`, blockName, sum, buffer.Len()))
 	}
 
-	if e.model.TamanhoRegistro() != sum {
-		log.Println(buffer.String())
-		log.Println(int64(buffer.Len()))
+	if e.model.TamanhoRegistro() != -1 {
+		if e.model.TamanhoRegistro() != sum {
+			log.Println(buffer.String())
+			log.Println(int64(buffer.Len()))
 
-		panic(fmt.Sprintf(`
+			panic(fmt.Sprintf(`
 			Block: %s
 			Layout: %d
 			Result: %v
 		`, blockName, e.model.TamanhoRegistro(), sum))
+		}
 	}
 
 	return buffer.String()
