@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 )
@@ -31,12 +32,15 @@ func (l *Lote) InserirDetalhe(novo Detalhe) {
 func (l *Lote) Segmentos() []Segmento {
 	keys := []string{}
 	records := map[string]Segmento{}
+	i := 0
 
 	for _, detalhe := range l.detalhes {
 		for key, value := range detalhe {
-			keys = append(keys, key)
-			records[key] = Segmento{
-				Nome:    key,
+			i = i + 1
+			nKey := fmt.Sprintf("%d.%s", i, key)
+			keys = append(keys, nKey)
+			records[nKey] = Segmento{
+				Nome:    nKey,
 				Valores: value,
 			}
 		}

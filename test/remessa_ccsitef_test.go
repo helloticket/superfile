@@ -31,62 +31,58 @@ func TestRemessaCCSitefExtrato(t *testing.T) {
 	lote.Header["identificacao_moeda"] = "RE"
 	lote.Header["nseq"] = 1
 
-	detalhe := lote.NovoDetalhe()
+	detalhe1 := lote.NovoDetalhe()
+	detalhe1["segmento_cv"]["identificacao_loja"] = "1"
+	detalhe1["segmento_cv"]["nsu_host_transacao"] = 100000000000
+	detalhe1["segmento_cv"]["data_transacao"] = 00000000
+	detalhe1["segmento_cv"]["hora_transacao"] = 000000
+	detalhe1["segmento_cv"]["tipo_lancamento"] = 0
+	detalhe1["segmento_cv"]["data_lancamento"] = 0000000
+	detalhe1["segmento_cv"]["tipo_produto"] = "0"
+	detalhe1["segmento_cv"]["meio_captura"] = 0
+	detalhe1["segmento_cv"]["valor_bruno_venda"] = 00000000000
+	detalhe1["segmento_cv"]["valor_desconto"] = 00000000000
+	detalhe1["segmento_cv"]["valor_liquida_venda"] = 00000000000
+	detalhe1["segmento_cv"]["numero_cartao"] = "0"
+	detalhe1["segmento_cv"]["numero_parcela"] = 00
+	detalhe1["segmento_cv"]["numero_total_parcelas"] = 00
+	detalhe1["segmento_cv"]["nsu_host_parcela"] = "0"
+	detalhe1["segmento_cv"]["valor_bruto_parcela"] = 00000000000
+	detalhe1["segmento_cv"]["valor_desconto_parcela"] = 00000000000
+	detalhe1["segmento_cv"]["valor_liquido_parcela"] = 00000000000
+	detalhe1["segmento_cv"]["banco"] = 000
+	detalhe1["segmento_cv"]["agencia"] = 000000
+	detalhe1["segmento_cv"]["conta"] = "0"
+	detalhe1["segmento_cv"]["codigo_autorizacao"] = 000000000000
+	detalhe1["segmento_cv"]["nseq"] = 000000
+	lote.InserirDetalhe(detalhe1)
 
-	detalhe["segmento_aj"]["identificacao_loja"] = "0"
-	detalhe["segmento_aj"]["nsu_host_transacao_original"] = 000000000000
-	detalhe["segmento_aj"]["data_transacao_original"] = 00000000
-	detalhe["segmento_aj"]["numero_parcela"] = 00
-	detalhe["segmento_aj"]["nsu_host_transacao"] = 000000000000
-	detalhe["segmento_aj"]["data_transacao"] = 00000000
-	detalhe["segmento_aj"]["hora_transacao"] = 000000
-	detalhe["segmento_aj"]["tipo_lancamento"] = 0
-	detalhe["segmento_aj"]["data_lancamento"] = 00000000
-	detalhe["segmento_aj"]["meio_captura"] = 0
-	detalhe["segmento_aj"]["tipo_ajuste"] = 0
-	detalhe["segmento_aj"]["codigo_ajuste"] = 000
-	detalhe["segmento_aj"]["descricao_motivo_ajuste"] = "0"
-	detalhe["segmento_aj"]["valor_bruto_parcela"] = 00000000000
-	detalhe["segmento_aj"]["valor_desconto_comissao"] = 00000000000
-	detalhe["segmento_aj"]["valor_liquido"] = 00000000000
-	detalhe["segmento_aj"]["banco"] = 000
-	detalhe["segmento_aj"]["agencia"] = 00000000000
-	detalhe["segmento_aj"]["conta"] = "0"
-	detalhe["segmento_aj"]["nseq"] = 000000
-	detalhe["segmento_cc"]["identificacao_loja"] = "0"
-	detalhe["segmento_cc"]["nsu_host_transacao_original"] = 000000000000
-	detalhe["segmento_cc"]["data_transacao_original"] = 00000000
-	detalhe["segmento_cc"]["numero_parcela"] = 00
-	detalhe["segmento_cc"]["nsu_host_transacao"] = 000000000000
-	detalhe["segmento_cc"]["data_transacao"] = 00000000
-	detalhe["segmento_cc"]["hora_transacao"] = 000000
-	detalhe["segmento_cc"]["meio_captura"] = 0
-	detalhe["segmento_cc"]["nseq"] = 000000
-	detalhe["segmento_cv"]["identificacao_loja"] = "0"
-	detalhe["segmento_cv"]["nsu_host_transacao"] = 000000000000
-	detalhe["segmento_cv"]["data_transacao"] = 00000000
-	detalhe["segmento_cv"]["hora_transacao"] = 000000
-	detalhe["segmento_cv"]["tipo_lancamento"] = 0
-	detalhe["segmento_cv"]["data_lancamento"] = 0000000
-	detalhe["segmento_cv"]["tipo_produto"] = "0"
-	detalhe["segmento_cv"]["meio_captura"] = 0
-	detalhe["segmento_cv"]["valor_bruno_venda"] = 00000000000
-	detalhe["segmento_cv"]["valor_desconto"] = 00000000000
-	detalhe["segmento_cv"]["valor_liquida_venda"] = 00000000000
-	detalhe["segmento_cv"]["numero_cartao"] = "0"
-	detalhe["segmento_cv"]["numero_parcela"] = 00
-	detalhe["segmento_cv"]["numero_total_parcelas"] = 00
-	detalhe["segmento_cv"]["nsu_host_parcela"] = "0"
-	detalhe["segmento_cv"]["valor_bruto_parcela"] = 00000000000
-	detalhe["segmento_cv"]["valor_desconto_parcela"] = 00000000000
-	detalhe["segmento_cv"]["valor_liquido_parcela"] = 00000000000
-	detalhe["segmento_cv"]["banco"] = 000
-	detalhe["segmento_cv"]["agencia"] = 000000
-	detalhe["segmento_cv"]["conta"] = "0"
-	detalhe["segmento_cv"]["codigo_autorizacao"] = 000000000000
-	detalhe["segmento_cv"]["nseq"] = 000000
+	detalhe2 := lote.NovoDetalhe()
+	detalhe2["segmento_cv"]["identificacao_loja"] = "2"
+	detalhe2["segmento_cv"]["nsu_host_transacao"] = 200000000000
+	detalhe2["segmento_cv"]["data_transacao"] = 00000000
+	detalhe2["segmento_cv"]["hora_transacao"] = 000000
+	detalhe2["segmento_cv"]["tipo_lancamento"] = 0
+	detalhe2["segmento_cv"]["data_lancamento"] = 0000000
+	detalhe2["segmento_cv"]["tipo_produto"] = "0"
+	detalhe2["segmento_cv"]["meio_captura"] = 0
+	detalhe2["segmento_cv"]["valor_bruno_venda"] = 00000000000
+	detalhe2["segmento_cv"]["valor_desconto"] = 00000000000
+	detalhe2["segmento_cv"]["valor_liquida_venda"] = 00000000000
+	detalhe2["segmento_cv"]["numero_cartao"] = "0"
+	detalhe2["segmento_cv"]["numero_parcela"] = 00
+	detalhe2["segmento_cv"]["numero_total_parcelas"] = 00
+	detalhe2["segmento_cv"]["nsu_host_parcela"] = "0"
+	detalhe2["segmento_cv"]["valor_bruto_parcela"] = 00000000000
+	detalhe2["segmento_cv"]["valor_desconto_parcela"] = 00000000000
+	detalhe2["segmento_cv"]["valor_liquido_parcela"] = 00000000000
+	detalhe2["segmento_cv"]["banco"] = 000
+	detalhe2["segmento_cv"]["agencia"] = 000000
+	detalhe2["segmento_cv"]["conta"] = "0"
+	detalhe2["segmento_cv"]["codigo_autorizacao"] = 000000000000
+	detalhe2["segmento_cv"]["nseq"] = 000000
+	lote.InserirDetalhe(detalhe2)
 
-	lote.InserirDetalhe(detalhe)
 	lote.Trailer["lote_servico"] = lote.Sequencial
 	lote.Trailer["quantidade_registros_lote"] = 1
 
@@ -103,5 +99,5 @@ func TestRemessaCCSitefExtrato(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	assertFile(t, 7, arquivo.Name(), true)
+	assertFile(t, 6, arquivo.Name(), false)
 }

@@ -25,14 +25,8 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 		return nil, errors.New("Arquivo de definição de layout vazio")
 	}
 
-	cache := model.RecordDetailMap{}
-	if value, ok := config["remessa"]; ok {
-		cache = carregarDetalhes(value.(map[interface{}]interface{}))
-	}
-
 	return &ModeloLayout{
-		config:      config,
-		definitions: cache,
+		config: config,
 	}, nil
 }
 
@@ -52,7 +46,11 @@ func (l *ModeloLayout) Validate() error {
 }
 
 func (l *ModeloLayout) GetSegmentoDefinitions() model.RecordDetailMap {
-	return l.definitions
+	cache := model.RecordDetailMap{}
+	if value, ok := l.config["remessa"]; ok {
+		cache = carregarDetalhes(value.(map[interface{}]interface{}))
+	}
+	return cache
 }
 
 func (l *ModeloLayout) GetRemessaLayout() model.FileConfigMap {
