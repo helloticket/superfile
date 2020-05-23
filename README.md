@@ -2,6 +2,7 @@
 
 Parser de arquivos de configuração cnab e outros layouts.
 
+
 ## Instalação
 
 ```bash
