@@ -99,5 +99,5 @@ func TestRemessaCCSitefExtrato(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	assertFile(t, 6, arquivo.Name(), false)
+	assertFile(t, 6, arquivo.Name(), true)
 }
