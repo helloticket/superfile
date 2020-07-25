@@ -33,6 +33,30 @@ func NewRemessaFile(remessa *model.Remessa, fileName string) RemessaFile {
 		}
 	}
 
+	if remessa.GetLayout() == model.LayoutAFD {
+		return &remessaAFDFile{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
+	if remessa.GetLayout() == model.LayoutAFDT {
+		return &remessaAFDTFile{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
+	if remessa.GetLayout() == model.LayoutACJEF {
+		return &remessaACJEFFile{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
 	return &remessaCNAB240File{
 		model:    remessa,
 		fileName: fileName,
@@ -59,6 +83,30 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 
 	if layout.GetLayout() == model.LayoutCCSITEF {
 		return &retornoCCSITEFFile{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutAFD {
+		return &retornoAFDFile{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutAFDT {
+		return &retornoAFDTFile{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutACJEF {
+		return &retornoAFDTFile{
 			layout:  layout,
 			content: content,
 			decoder: NewDecoder(),

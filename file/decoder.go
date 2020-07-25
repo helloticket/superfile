@@ -39,7 +39,7 @@ func (e Decoder) Parse(blockName string, source string, layout model.FileConfigM
 				Size:         end - start + 1,
 				DefaultValue: definition["default"],
 				Picture:      helper.ToString(definition["picture"]),
-				Format:       helper.ToString(definition["format"]),
+				Format:       helper.ToString(definition["data_format"]),
 				Value:        source,
 			})
 		}

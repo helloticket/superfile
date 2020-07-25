@@ -109,4 +109,4 @@ go get github.com/helloticket/superfile
 
 ## Inspirado
 
-Baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-
+Baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-layouts)

@@ -19,9 +19,7 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 	}
 
 	layout := helper.ToString(config["layout"])
-	if model.LayoutCNAB400 != layout &&
-		model.LayoutCNAB240 != layout &&
-		model.LayoutCCSITEF != layout {
+	if !model.RegisterLayouts[layout] {
 		return nil, errors.New("Arquivo de definição de layout vazio")
 	}
 
@@ -36,9 +34,7 @@ func (l *ModeloLayout) Validate() error {
 	}
 
 	layout := helper.ToString(l.config["layout"])
-	if model.LayoutCNAB400 != layout &&
-		model.LayoutCNAB240 != layout &&
-		model.LayoutCCSITEF != layout {
+	if !model.RegisterLayouts[layout] {
 		return errors.New("Arquivo de definição de layout vazio")
 	}
 

@@ -4,11 +4,11 @@ import (
 	"strings"
 
 	"github.com/helloticket/superfile"
-	"github.com/helloticket/superfile/layout/ccsitef"
+	"github.com/helloticket/superfile/layout/mte"
 )
 
 func main() {
-	source := strings.NewReader(ccsitef.ExtratoEletronico)
+	source := strings.NewReader(mte.ACJEF)
 	layout, err := superfile.NewLayout(source)
 	if err != nil {
 		panic(err)
