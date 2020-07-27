@@ -16,6 +16,7 @@ type Linha struct {
 	Size         int
 	Picture      string
 	Format       string
+	Options      map[string]string
 	DefaultValue interface{}
 	Description  string
 	Value        interface{}
@@ -48,6 +49,12 @@ func (l *Linha) Decode(d field.Picture) interface{} {
 		opt["data_format"] = l.Format
 	}
 
+	if len(l.Options) != 0 {
+		for k, v := range l.Options {
+			opt[k] = v
+		}
+	}
+
 	decoded, err := d.Decode(l.value(), l.Picture, opt)
 	if err != nil {
 		log.Printf("Parser error: %s - %v", l, err)
@@ -62,9 +69,15 @@ func (l *Linha) Encode(d field.Picture) string {
 		data = l.Value
 	}
 
-	opt := field.Empty
+	opt := field.Options{}
 	if l.Format != "" {
 		opt["data_format"] = l.Format
+	}
+
+	if len(l.Options) != 0 {
+		for k, v := range l.Options {
+			opt[k] = v
+		}
 	}
 
 	output, err := d.Encode(data, l.Picture, opt)

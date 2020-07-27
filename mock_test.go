@@ -13,6 +13,10 @@ func (l *LayoutFake) GetRemessaLayout() model.FileConfigMap {
 	return model.FileConfigMap{}
 }
 
+func (l *LayoutFake) GlobalSettings() map[string]string {
+	return map[string]string{}
+}
+
 func (l *LayoutFake) GetRetornoLayout() model.FileConfigMap {
 	return model.FileConfigMap{}
 }

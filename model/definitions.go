@@ -21,5 +21,7 @@ type Layout interface {
 
 	GetTamanhoRegistro() int64
 
-	Validate() error
+  Validate() error
+  
+  GlobalSettings() map[string]string
 }

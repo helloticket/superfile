@@ -38,6 +38,17 @@ func (e Encoder) Parse(blockName string, source model.RecordMap, layout model.Fi
 			start := helper.ToIntFromSlice(pos, 0)
 			end := helper.ToIntFromSlice(pos, 1)
 
+			options := map[string]string{}
+			if definition["decimal_separator"] != nil {
+				options["decimal_separator"] = helper.ToString(definition["decimal_separator"])
+			}
+
+			if global := e.model.GlobalSettingsLayout(); len(global) != 0 {
+				for k, v := range global {
+					options[k] = v
+				}
+			}
+
 			linhas = append(linhas, model.Linha{
 				Block:        blockName,
 				Name:         helper.ToString(field),
@@ -47,6 +58,7 @@ func (e Encoder) Parse(blockName string, source model.RecordMap, layout model.Fi
 				DefaultValue: definition["default"],
 				Picture:      helper.ToString(definition["picture"]),
 				Format:       helper.ToString(definition["data_format"]),
+				Options:      options,
 				Value:        source[helper.ToString(field)],
 			})
 		}
@@ -70,8 +82,9 @@ func (e Encoder) Encode(blockName string, linhas []model.Linha) string {
 				Block: %s
 				Field: %s
 				Picture: %s
-				Length: %v <=> %v
-			`, blockName, l.Name, l.Picture, l.Size, len(encoded)))
+        Length: %v <=> %v
+        Encoded: %v
+			`, blockName, l.Name, l.Picture, l.Size, len(encoded), encoded))
 		}
 
 		buffer.WriteString(encoded)

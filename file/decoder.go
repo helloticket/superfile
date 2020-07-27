@@ -1,6 +1,7 @@
 package file
 
 import (
+	"fmt"
 	"sort"
 
 	"github.com/helloticket/superfile/field"
@@ -10,11 +11,13 @@ import (
 
 type Decoder struct {
 	picture field.Picture
+	layout  model.Layout
 }
 
-func NewDecoder() *Decoder {
+func NewDecoder(layout model.Layout) *Decoder {
 	return &Decoder{
 		picture: field.NewPicture(),
+		layout:  layout,
 	}
 }
 
@@ -31,6 +34,17 @@ func (e Decoder) Parse(blockName string, source string, layout model.FileConfigM
 			start := helper.ToIntFromSlice(pos, 0)
 			end := helper.ToIntFromSlice(pos, 1)
 
+			options := map[string]string{}
+			if definition["decimal_separator"] != nil {
+				options["decimal_separator"] = helper.ToString(definition["decimal_separator"])
+			}
+
+			if global := e.layout.GlobalSettings(); len(global) != 0 {
+				for k, v := range global {
+					options[fmt.Sprintf("global_%v", k)] = v
+				}
+			}
+
 			linhas = append(linhas, model.Linha{
 				Block:        blockName,
 				Name:         helper.ToString(field),
@@ -40,6 +54,7 @@ func (e Decoder) Parse(blockName string, source string, layout model.FileConfigM
 				DefaultValue: definition["default"],
 				Picture:      helper.ToString(definition["picture"]),
 				Format:       helper.ToString(definition["data_format"]),
+				Options:      options,
 				Value:        source,
 			})
 		}

@@ -11,6 +11,7 @@ import (
 type ModeloLayout struct {
 	config      model.FileConfigMap
 	definitions model.RecordDetailMap
+	global      map[string]string
 }
 
 func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
@@ -23,9 +24,22 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 		return nil, errors.New("Arquivo de definição de layout vazio")
 	}
 
+	globalSettings := map[string]string{}
+
+	if global, ok := config["global"].(map[interface{}]interface{}); ok && global != nil {
+		if value, ok := global["alinhamento_alfanumerico"].(string); ok && value != "" {
+			globalSettings["global_alinhamento_alfanumerico"] = value
+		}
+	}
+
 	return &ModeloLayout{
 		config: config,
+		global: globalSettings,
 	}, nil
+}
+
+func (l *ModeloLayout) GlobalSettings() map[string]string {
+	return l.global
 }
 
 func (l *ModeloLayout) Validate() error {

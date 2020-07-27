@@ -23,8 +23,6 @@ type picture struct {
 
 type Options map[string]string
 
-var Empty = Options{}
-
 var dateFormat = map[string]string{
 	"ddmmyy":   "020106",
 	"ddmmyyyy": "02012006",
@@ -45,12 +43,17 @@ func (p *picture) Decode(target string, pic string, opts Options) (interface{}, 
 		panic(err)
 	}
 
-	if strings.TrimSpace(target) == "" {
+	alignAlfa := " "
+	if value := opts["global_alinhamento_alfanumerico"]; value != "" {
+		alignAlfa = value
+	}
+
+	if strings.Trim(target, alignAlfa) == "" {
 		return nil, nil
 	}
 
 	if match["tipo1"] == "X" && match["tipo2"] == "" {
-		return strings.TrimSpace(target), nil
+		return strings.Trim(target, alignAlfa), nil
 	}
 
 	if match["tipo1"] == "9" && match["tipo2"] == "" {
@@ -116,6 +119,11 @@ func (p *picture) Encode(target interface{}, pic string, opts Options) (string, 
 		panic(err)
 	}
 
+	alignAlfa := " "
+	if value := opts["global_alinhamento_alfanumerico"]; value != "" {
+		alignAlfa = value
+	}
+
 	if match["tipo1"] == "X" && match["tipo2"] == "" {
 		if target == nil {
 			size, err := helper.ToInt(match["tamanho1"])
@@ -123,7 +131,7 @@ func (p *picture) Encode(target interface{}, pic string, opts Options) (string, 
 				return "", err
 			}
 
-			return helper.RightPad("", " ", size), nil
+			return helper.RightPad("", alignAlfa, size), nil
 		}
 
 		value, ok := target.(string)
@@ -137,7 +145,7 @@ func (p *picture) Encode(target interface{}, pic string, opts Options) (string, 
 		}
 
 		value = value[0:helper.Min(size, len(value))]
-		return helper.RightPad(value, " ", size), nil
+		return helper.RightPad(value, alignAlfa, size), nil
 	}
 
 	if date, ok := target.(time.Time); ok && match["tipo1"] == "9" {
@@ -217,9 +225,17 @@ func (p *picture) Encode(target interface{}, pic string, opts Options) (string, 
 			extraRounded := math.Round(float64(expPos) / float64(extraPow))
 			exp[1] = strconv.FormatFloat(extraRounded, 'f', -1, 64)
 		}
+
 		rightValue := helper.RightPad(exp[1], "0", rightSize)
 
-		return leftValue + rightValue, nil
+		separator := ""
+		if strings.TrimSpace(opts["decimal_separator"]) != "" {
+			separator = strings.TrimSpace(opts["decimal_separator"])
+		}
+
+		total := fmt.Sprintf("%s%s%s", leftValue, separator, rightValue)
+
+		return total, nil
 	}
 
 	return "", nil

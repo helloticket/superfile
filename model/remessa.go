@@ -53,6 +53,10 @@ func (r *Remessa) NovoLoteSegmentoVazio(sequencial int64) *Lote {
 	}
 }
 
+func (r *Remessa) GlobalSettingsLayout() map[string]string {
+	return r.layout.GlobalSettings()
+}
+
 func (r *Remessa) GetLayout() string {
 	return r.layout.GetLayout()
 }

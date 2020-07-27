@@ -57,6 +57,14 @@ func NewRemessaFile(remessa *model.Remessa, fileName string) RemessaFile {
 		}
 	}
 
+	if remessa.GetLayout() == model.LayoutFortesPS {
+		return &remessaFortesPSFile{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
 	return &remessaCNAB240File{
 		model:    remessa,
 		fileName: fileName,
@@ -77,7 +85,7 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 		return &retornoCNAB400File{
 			layout:  layout,
 			content: content,
-			decoder: NewDecoder(),
+			decoder: NewDecoder(layout),
 		}, nil
 	}
 
@@ -85,7 +93,7 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 		return &retornoCCSITEFFile{
 			layout:  layout,
 			content: content,
-			decoder: NewDecoder(),
+			decoder: NewDecoder(layout),
 		}, nil
 	}
 
@@ -93,7 +101,7 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 		return &retornoAFDFile{
 			layout:  layout,
 			content: content,
-			decoder: NewDecoder(),
+			decoder: NewDecoder(layout),
 		}, nil
 	}
 
@@ -101,7 +109,7 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 		return &retornoAFDTFile{
 			layout:  layout,
 			content: content,
-			decoder: NewDecoder(),
+			decoder: NewDecoder(layout),
 		}, nil
 	}
 
@@ -109,13 +117,21 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 		return &retornoAFDTFile{
 			layout:  layout,
 			content: content,
-			decoder: NewDecoder(),
+			decoder: NewDecoder(layout),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutFortesPS {
+		return &retornoFortesPSFile{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(layout),
 		}, nil
 	}
 
 	return &retornoCNAB240File{
 		layout:  layout,
 		content: content,
-		decoder: NewDecoder(),
+		decoder: NewDecoder(layout),
 	}, nil
 }
