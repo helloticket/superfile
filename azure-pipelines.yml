@@ -30,7 +30,7 @@ jobs:
           echo '##vso[task.prependpath]$(GOBIN)'
           echo '##vso[task.prependpath]$(GOROOT)/bin'
         displayName: "Set up the Go workspace"
-        
+
       - script: |
           go get github.com/securego/gosec/cmd/gosec
           gosec -quiet ./...
@@ -49,7 +49,21 @@ jobs:
 
       - script: |
           make test
+          make coverage
         workingDirectory: "$(modulePath)"
         env:
           GO111MODULE: on
         displayName: "Test"
+
+      - task: PublishTestResults@2
+        inputs:
+          testRunner: JUnit
+          testResultsFiles: $(System.DefaultWorkingDirectory)/**/report.xml
+
+      - task: PublishCodeCoverageResults@1
+        inputs:
+          codeCoverageTool: Cobertura
+          pathToSources: "$(System.DefaultWorkingDirectory)"
+          summaryFileLocation: $(System.DefaultWorkingDirectory)/**/coverage.xml
+          reportDirectory: $(System.DefaultWorkingDirectory)/**/coverage
+          failIfCoverageEmpty: true
