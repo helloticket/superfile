@@ -114,7 +114,7 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 	}
 
 	if layout.GetLayout() == model.LayoutACJEF {
-		return &retornoAFDTFile{
+		return &retornoACJEFFile{
 			layout:  layout,
 			content: content,
 			decoder: NewDecoder(layout),

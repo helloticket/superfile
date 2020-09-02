@@ -63,9 +63,7 @@ func (l *Retorno) Segmentos() []Segmento {
 	segmentos := []Segmento{}
 
 	for _, l := range l.Lotes {
-		for _, s := range l.Segmentos() {
-			segmentos = append(segmentos, s)
-		}
+		segmentos = append(segmentos, l.Segmentos()...)
 	}
 
 	return segmentos

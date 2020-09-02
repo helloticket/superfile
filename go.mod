@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/helderfarias/superfile v0.0.0-20200424021745-cc762154993d // indirect
 	github.com/piquette/finance-go v1.0.0
+	github.com/securego/gosec v0.0.0-20200401082031-e946c8c39989 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/viper v1.7.0

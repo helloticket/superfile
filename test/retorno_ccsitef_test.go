@@ -12,14 +12,15 @@ import (
 
 func TestRetornoCCSitefExtrato(t *testing.T) {
 	source := strings.NewReader(ccsitef.ExtratoEletronico)
-	layout, err := superfile.NewLayout(source)
+	layout, err1 := superfile.NewLayout(source)
 
 	f, _ := os.Open("fixtures/ccsitef-vendas.rem")
 	defer f.Close()
-	arquivo, err := superfile.NewRetornoFile(layout, f)
+	arquivo, err2 := superfile.NewRetornoFile(layout, f)
 	retorno := arquivo.Read()
 
-	assert.Nil(t, err)
+	assert.Nil(t, err1)
+	assert.Nil(t, err2)
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)

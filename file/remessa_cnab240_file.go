@@ -2,6 +2,7 @@ package file
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/helloticket/superfile/model"
@@ -19,23 +20,25 @@ func (w *remessaCNAB240File) Write() *os.File {
 		panic(err)
 	}
 
-	defer file.Close()
-
 	header := w.encodeFileHeader()
 	if header != "" {
-		file.WriteString(header)
-		file.WriteString("\r\n")
+		writeString(file, header)
+		writeString(file, "\r\n")
 	}
 
 	for _, lote := range w.encodeLotes() {
-		file.WriteString(lote)
-		file.WriteString("\r\n")
+		writeString(file, lote)
+		writeString(file, "\r\n")
 	}
 
 	trailer := w.encodeFileTrailer()
 	if trailer != "" {
-		file.WriteString(trailer)
-		file.WriteString("\r\n")
+		writeString(file, trailer)
+		writeString(file, "\r\n")
+	}
+
+	if err := file.Close(); err != nil {
+		log.Println(err)
 	}
 
 	return file

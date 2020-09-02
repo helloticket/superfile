@@ -44,9 +44,9 @@ func (r *retornoCCSITEFFile) Read() *model.Retorno {
 			loteCorrente.Header = r.decodeLoteHeader(linha)
 		}
 
-		if "CV" == tipoRegistro ||
-			"AJ" == tipoRegistro ||
-			"CC" == tipoRegistro {
+		if tipoRegistro == "CV" ||
+			tipoRegistro == "AJ" ||
+			tipoRegistro == "CC" {
 			numeroSegmentos++
 			segmento := r.decodeSegmento(linha)
 			detalheCorrente[fmt.Sprintf("%d.%s", numeroSegmentos, segmento.Nome)] = segmento.Valores

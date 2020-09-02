@@ -9,9 +9,8 @@ import (
 )
 
 type ModeloLayout struct {
-	config      model.FileConfigMap
-	definitions model.RecordDetailMap
-	global      map[string]string
+	config model.FileConfigMap
+	global map[string]string
 }
 
 func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
