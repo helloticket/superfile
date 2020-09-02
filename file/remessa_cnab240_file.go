@@ -22,8 +22,10 @@ func (w *remessaCNAB240File) Write() *os.File {
 	defer file.Close()
 
 	header := w.encodeFileHeader()
-	file.WriteString(header)
-	file.WriteString("\r\n")
+	if header != "" {
+		file.WriteString(header)
+		file.WriteString("\r\n")
+	}
 
 	for _, lote := range w.encodeLotes() {
 		file.WriteString(lote)
@@ -31,8 +33,10 @@ func (w *remessaCNAB240File) Write() *os.File {
 	}
 
 	trailer := w.encodeFileTrailer()
-	file.WriteString(trailer)
-	file.WriteString("\r\n")
+	if trailer != "" {
+		file.WriteString(trailer)
+		file.WriteString("\r\n")
+	}
 
 	return file
 }
@@ -61,12 +65,20 @@ func (w *remessaCNAB240File) encodeLotes() []string {
 
 func (w *remessaCNAB240File) encodeFileHeader() string {
 	config := w.model.GetRemessaLayout()
+	if config["header_arquivo"] == nil {
+		return ""
+	}
+
 	layout := config["header_arquivo"].(map[interface{}]interface{})
 	return w.encoder.ParseAndEncode("header_arquivo", w.model.Header, layout)
 }
 
 func (w *remessaCNAB240File) encodeFileTrailer() string {
 	config := w.model.GetRemessaLayout()
+	if config["trailer_arquivo"] == nil {
+		return ""
+	}
+
 	layout := config["trailer_arquivo"].(map[interface{}]interface{})
 	return w.encoder.ParseAndEncode("trailer_arquivo", w.model.Trailer, layout)
 }

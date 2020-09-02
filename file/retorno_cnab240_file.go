@@ -113,6 +113,9 @@ func (r *retornoCNAB240File) decodeLoteHeader(row string) map[string]interface{}
 
 func (r *retornoCNAB240File) decodeFileHeader(row string) map[string]interface{} {
 	header := map[string]interface{}{}
+	if r.getLayoutFor("header_arquivo") == nil {
+		return header
+	}
 
 	linhas := r.decoder.Parse("header_arquivo", row, r.getLayoutFor("header_arquivo"))
 
@@ -125,6 +128,9 @@ func (r *retornoCNAB240File) decodeFileHeader(row string) map[string]interface{}
 
 func (r *retornoCNAB240File) decodeFileTrailer(row string) map[string]interface{} {
 	trailer := map[string]interface{}{}
+	if r.getLayoutFor("header_arquivo") == nil {
+		return trailer
+	}
 
 	linhas := r.decoder.Parse("trailer_arquivo", row, r.getLayoutFor("trailer_arquivo"))
 
@@ -137,5 +143,9 @@ func (r *retornoCNAB240File) decodeFileTrailer(row string) map[string]interface{
 
 func (r *retornoCNAB240File) getLayoutFor(name string) map[interface{}]interface{} {
 	config := r.layout.GetRetornoLayout()
+	if config[name] == nil {
+		return nil
+	}
+
 	return config[name].(map[interface{}]interface{})
 }

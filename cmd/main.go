@@ -4,11 +4,11 @@ import (
 	"strings"
 
 	"github.com/helloticket/superfile"
-	"github.com/helloticket/superfile/layout/fortes"
+	"github.com/helloticket/superfile/layout/bb"
 )
 
 func main() {
-	source := strings.NewReader(fortes.ImportacaoMovimento)
+	source := strings.NewReader(bb.CNAB240ExtratoContaCorrente)
 	layout, err := superfile.NewLayout(source)
 	if err != nil {
 		panic(err)

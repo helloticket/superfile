@@ -30,6 +30,10 @@ func (w *RemessaDebug) Write() *os.File {
 
 func (w *RemessaDebug) encodeFileHeader() {
 	config := w.model.GetRemessaLayout()
+	if config["header_arquivo"] == nil {
+		return
+	}
+
 	layout := config["header_arquivo"].(map[interface{}]interface{})
 	linhas := w.encoder.Parse("header_arquivo", w.model.Header, layout)
 	w.output("remessa.Header", linhas)
@@ -64,8 +68,12 @@ func (w *RemessaDebug) encodeLotes() {
 }
 
 func (w *RemessaDebug) encodeFileTrailer() {
-	fmt.Println()
 	config := w.model.GetRemessaLayout()
+	if config["trailer_arquivo"] == nil {
+		return
+	}
+
+	fmt.Println()
 	layout := config["trailer_arquivo"].(map[interface{}]interface{})
 	linhas := w.encoder.Parse("trailer_arquivo", w.model.Header, layout)
 	w.output("remessa.Trailer", linhas)
