@@ -8,6 +8,7 @@ import (
 
 	"github.com/helloticket/superfile/helper"
 	"github.com/helloticket/superfile/model"
+	"github.com/sirupsen/logrus"
 )
 
 type retornoCNAB240File struct {
@@ -71,6 +72,10 @@ func (r *retornoCNAB240File) Read() *model.Retorno {
 func (r *retornoCNAB240File) decodeSegmento(row string) model.Segmento {
 	segmento := fmt.Sprintf("segmento_%s", strings.ToLower(row[13:14]))
 	layout := r.getLayoutFor("detalhes")
+	if layout[segmento] == nil {
+		logrus.Fatalf("Segmento inválido: %v, %v", segmento, row)
+	}
+
 	layout = layout[segmento].(map[interface{}]interface{})
 	block := fmt.Sprintf("detalhes.%s", segmento)
 	linhas := r.decoder.Parse(block, row, layout)

@@ -237,10 +237,10 @@ remessa:
       natureza_lancamento:
         pos: [109,111]
         picture: 'X(3)'
-      tipo_complemento_lancamnto:
+      tipo_complemento_lancamento:
         pos: [112,113]
         picture: '9(2)'
-      complemento_lancamnto:
+      complemento_lancamento:
         pos: [114,133]
         picture: 'X(20)'
       identificacao_isencao_cpmf:
@@ -493,10 +493,10 @@ retorno:
       natureza_lancamento:
         pos: [109,111]
         picture: 'X(3)'
-      tipo_complemento_lancamnto:
+      tipo_complemento_lancamento:
         pos: [112,113]
         picture: '9(2)'
-      complemento_lancamnto:
+      complemento_lancamento:
         pos: [114,133]
         picture: 'X(20)'
       identificacao_isencao_cpmf:

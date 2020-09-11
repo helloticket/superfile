@@ -76,8 +76,8 @@ func TestRemessaBBExtratoContaCorrenteCnab240Cobranca(t *testing.T) {
 		detalhe["segmento_e"]["digito_verificador_agencia_conta_corrente"] = "0"
 		detalhe["segmento_e"]["nome_empresa"] = "NOME EMPRESA LOTE"
 		detalhe["segmento_e"]["natureza_lancamento"] = "0"
-		detalhe["segmento_e"]["tipo_complemento_lancamnto"] = 00
-		detalhe["segmento_e"]["complemento_lancamnto"] = "0"
+		detalhe["segmento_e"]["tipo_complemento_lancamento"] = 00
+		detalhe["segmento_e"]["complemento_lancamento"] = "0"
 		detalhe["segmento_e"]["identificacao_isencao_cpmf"] = "0"
 		detalhe["segmento_e"]["data_contabil"] = 00000000
 		detalhe["segmento_e"]["data_lancamento"] = 00000000
