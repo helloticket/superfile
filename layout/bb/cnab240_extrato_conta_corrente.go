@@ -86,10 +86,10 @@ remessa:
       picture: '9(16)V9(2)'
     situacao_saldo_inicial:
       pos: [169,169]
-      picture: '9(1)'
+      picture: 'X(1)'
     posicao_saldo_inicial:
       pos: [170,170]
-      picture: '9(1)'
+      picture: 'X(1)'
     moeda_referenciada_extrato:
       pos: [171,173]
       picture: 'X(3)'

@@ -56,8 +56,8 @@ func TestRemessaBBExtratoContaCorrenteCnab240Cobranca(t *testing.T) {
 	lote.Header["nome_empresa"] = "NOME EMPRESA LOTE"
 	lote.Header["data_saldo_inicial"] = 00000000
 	lote.Header["valor_saldo_inicial"] = 000000000000000000
-	lote.Header["situacao_saldo_inicial"] = 0
-	lote.Header["posicao_saldo_inicial"] = 0
+	lote.Header["situacao_saldo_inicial"] = "0"
+	lote.Header["posicao_saldo_inicial"] = "0"
 	lote.Header["moeda_referenciada_extrato"] = "0"
 	lote.Header["numero_sequencia_extrato"] = 00000
 	remessa.InserirLote(lote)
