@@ -54,10 +54,10 @@ func TestRemessaACJEF(t *testing.T) {
 	detalhe["segmento_3"]["saldo_horas_compensar"] = 0000
 	detalhe["segmento_2"]["seq_registro"] = 2
 	detalhe["segmento_2"]["codigo_horario"] = 12
-	detalhe["segmento_2"]["entrada"] = 0000
-	detalhe["segmento_2"]["inicio_intervalo"] = 0000
-	detalhe["segmento_2"]["fim_intervalo"] = 0000
-	detalhe["segmento_2"]["saida"] = 0000
+	detalhe["segmento_2"]["entrada"] = time.Now()
+	detalhe["segmento_2"]["inicio_intervalo"] = time.Now()
+	detalhe["segmento_2"]["fim_intervalo"] = time.Now()
+	detalhe["segmento_2"]["saida"] = time.Now()
 	lote.InserirDetalhe(detalhe)
 
 	remessa.Trailer["seq_registro"] = 1

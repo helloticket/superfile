@@ -77,15 +77,19 @@ remessa:
       entrada:
         pos: [15,18]
         picture: '9(4)'  
+        data_format: "hhmm"
       inicio_intervalo:
         pos: [19,22]
-        picture: '9(4)'  
+        picture: '9(4)'
+        data_format: "hhmm"
       fim_intervalo:
         pos: [23,26]
-        picture: '9(4)'  
+        picture: '9(4)'
+        data_format: "hhmm"  
       saida:
         pos: [27,30]
-        picture: '9(4)'  
+        picture: '9(4)'
+        data_format: "hhmm"  
     segmento_3:
       seq_registro:
         pos: [1,9]
