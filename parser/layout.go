@@ -29,6 +29,14 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 		if value, ok := global["alinhamento_alfanumerico"].(string); ok && value != "" {
 			globalSettings["global_alinhamento_alfanumerico"] = value
 		}
+
+		if value, ok := global["ordenar_escrita_por"].(string); ok && value != "" {
+			globalSettings["ordenar_escrita_por"] = value
+		}
+
+		if value, ok := global["ordenar_escrita_usando_campo"].(string); ok && value != "" {
+			globalSettings["ordenar_escrita_usando_campo"] = value
+		}
 	}
 
 	return &ModeloLayout{

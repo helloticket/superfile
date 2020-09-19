@@ -17,3 +17,7 @@ var RegisterLayouts = map[string]bool{
 	LayoutACJEF:    true,
 	LayoutFortesPS: true,
 }
+
+const GlobalSettingsOrdenarEscritaPorSufixo = "sufixo_segmento"
+const GlobalSettingsOrdenarEscritaPorNomeCampo = "campo_segmento"
+const GlobalSettingsOrdenarEscritaPorSufixoECampo = "sufixo_e_campo_segmento"

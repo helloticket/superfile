@@ -15,6 +15,9 @@ servico: 'relatorio_afd'
 versao: '1.0.0'
 layout: 'afd'
 
+global:
+  ordenar_escrita_por: sufixo_segmento
+
 remessa:
   header_arquivo:
     codigo_registro:
@@ -83,8 +86,8 @@ remessa:
     segmento_2:
       codigo_registro:
         pos: [1,9]
-        picture: 'X(9)'
-        default: NST
+        picture: '9(9)'
+        default: '0'
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -115,8 +118,8 @@ remessa:
     segmento_3:
       codigo_registro:
         pos: [1,9]
-        picture: 'X(9)'
-        default: NST
+        picture: '9(9)'
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -135,8 +138,8 @@ remessa:
     segmento_4:
       codigo_registro:
         pos: [1,9]
-        picture: 'X(9)'
-        default: NST
+        picture: '9(9)'
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -160,8 +163,8 @@ remessa:
     segmento_5:
       codigo_registro:
         pos: [1,9]
-        picture: 'X(9)'
-        default: NST
+        picture: '9(9)'
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'

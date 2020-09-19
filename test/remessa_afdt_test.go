@@ -29,16 +29,19 @@ func TestRemessaAFDT(t *testing.T) {
 	lote := remessa.NovoLote()
 	remessa.InserirLote(lote)
 
-	detalhe := lote.NovoDetalhe()
-	detalhe["segmento_2"]["data_marcacao_ponto"] = time.Now()
-	detalhe["segmento_2"]["hora_marcacao_ponto"] = time.Now()
-	detalhe["segmento_2"]["numero_pis"] = 70746928042
-	detalhe["segmento_2"]["numero_fabricacao_rep"] = 1
-	detalhe["segmento_2"]["tipo_marcacao"] = "1"
-	detalhe["segmento_2"]["seq_empregado_jornada_entrada_saida"] = 1
-	detalhe["segmento_2"]["tipo_registro_eletro_digi_pre_assina"] = "2"
-	detalhe["segmento_2"]["motivo"] = "1"
-	lote.InserirDetalhe(detalhe)
+	for i := 1; i <= 20; i++ {
+		detalhe := lote.NovoDetalhe()
+		detalhe["segmento_2"]["seq_registro"] = i
+		detalhe["segmento_2"]["data_marcacao_ponto"] = time.Now()
+		detalhe["segmento_2"]["hora_marcacao_ponto"] = time.Now()
+		detalhe["segmento_2"]["numero_pis"] = 70746928042
+		detalhe["segmento_2"]["numero_fabricacao_rep"] = 1
+		detalhe["segmento_2"]["tipo_marcacao"] = "1"
+		detalhe["segmento_2"]["seq_empregado_jornada_entrada_saida"] = 1
+		detalhe["segmento_2"]["tipo_registro_eletro_digi_pre_assina"] = "2"
+		detalhe["segmento_2"]["motivo"] = "1"
+		lote.InserirDetalhe(detalhe)
+	}
 
 	remessa.Trailer["seq_registro"] = 1
 	remessaFile := file.NewRemessaFile(remessa, "afdt.rem")
@@ -49,5 +52,5 @@ func TestRemessaAFDT(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	assertFile(t, 3, arquivo.Name(), true)
+	assertFile(t, 22, arquivo.Name(), true)
 }

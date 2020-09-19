@@ -15,6 +15,10 @@ servico: 'relatorio_afdt'
 versao: '1.0.0'
 layout: 'afdt'
 
+global:
+  ordenar_escrita_por: campo_segmento
+  ordenar_escrita_usando_campo: seq_registro
+
 remessa:
   header_arquivo:
     seq_registro:
@@ -66,7 +70,8 @@ remessa:
     segmento_2:
       seq_registro:
         pos: [1,9]
-        picture: 'X(9)'
+        picture: '9(9)'
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -103,6 +108,7 @@ retorno:
     seq_registro:
       pos: [1,9]
       picture: '9(9)'
+      default: 0
     tipo_registro:
       pos: [10,10]
       picture: '9(1)'
@@ -149,8 +155,8 @@ retorno:
     segmento_2:
       seq_registro:
         pos: [1,9]
-        picture: 'X(9)'
-        default: NST
+        picture: '9(9)'
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'

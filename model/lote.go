@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+
+	"github.com/helloticket/superfile/helper"
 )
 
 type Lote struct {
@@ -30,30 +32,13 @@ func (l *Lote) InserirDetalhe(novo Detalhe) {
 }
 
 func (l *Lote) Segmentos() []Segmento {
-	keys := []string{}
-	records := map[string]Segmento{}
-	i := 0
-
-	for _, detalhe := range l.detalhes {
-		for key, value := range detalhe {
-			i = i + 1
-			nKey := fmt.Sprintf("%d.%s", i, key)
-			keys = append(keys, nKey)
-			records[nKey] = Segmento{
-				Nome:    nKey,
-				Valores: value,
-			}
-		}
-	}
-
-	sort.Strings(keys)
+	records, ordenacao := l.ordernarSegmentos()
 
 	preSegmentos := []Segmento{}
-	for _, key := range keys {
+	for _, key := range ordenacao {
 		if len(records[key].Valores) == 0 && !l.SegmentoVazio {
 			continue
 		}
-
 		preSegmentos = append(preSegmentos, records[key])
 	}
 
@@ -73,4 +58,81 @@ func (l *Lote) Segmentos() []Segmento {
 	}
 
 	return segmentos
+}
+
+func (l *Lote) ordernarSegmentos() (map[string]Segmento, []string) {
+	type entry struct {
+		key    string
+		sorte1 interface{}
+		sorte2 interface{}
+	}
+
+	entries := []entry{}
+	records := map[string]Segmento{}
+	i := 0
+
+	for _, detalhe := range l.detalhes {
+		for okey, fields := range detalhe {
+			i = i + 1
+			key := fmt.Sprintf("%d.%s", i, okey)
+
+			sorte1, sorte2 := l.definirEstrategiaOrdenacao(i, okey, fields)
+
+			entries = append(entries, entry{
+				key:    key,
+				sorte1: sorte1,
+				sorte2: sorte2,
+			})
+
+			records[key] = Segmento{
+				Nome:    key,
+				Valores: fields,
+			}
+		}
+	}
+
+	sort.Slice(entries, func(i, j int) bool {
+		return helper.Less(entries[i].sorte1, entries[j].sorte1) &&
+			helper.Less(entries[i].sorte2, entries[j].sorte2)
+	})
+
+	keys := []string{}
+	for _, k := range entries {
+		keys = append(keys, k.key)
+	}
+
+	return records, keys
+}
+
+func (l *Lote) definirEstrategiaOrdenacao(i int, okey string, fields RecordMap) (interface{}, interface{}) {
+	val, ok := l.layout.GlobalSettings()["ordenar_escrita_por"]
+	if !ok || val == "" {
+		return i, i
+	}
+
+	if val == GlobalSettingsOrdenarEscritaPorSufixo {
+		sorte1 := helper.ToSafeInt(strings.TrimPrefix(okey, "segmento_"))
+		sorte2 := helper.ToSafeInt(strings.TrimPrefix(okey, "segmento_"))
+		return sorte1, sorte2
+	}
+
+	if val == GlobalSettingsOrdenarEscritaPorNomeCampo {
+		campo, _ := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
+		if fields[campo] != "" {
+			sorte1 := fields[campo]
+			sorte2 := fields[campo]
+			return sorte1, sorte2
+		}
+	}
+
+	if val == GlobalSettingsOrdenarEscritaPorSufixoECampo {
+		campo, _ := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
+		if fields[campo] != "" {
+			sorte1 := helper.ToSafeInt(strings.TrimPrefix(okey, "segmento_"))
+			sorte2 := fields[campo]
+			return sorte1, sorte2
+		}
+	}
+
+	return i, i
 }

@@ -15,6 +15,10 @@ servico: 'relatorio_acjef'
 versao: '1.0.0'
 layout: 'acjef'
 
+global:
+  ordenar_escrita_por: campo_segmento
+  ordenar_escrita_usando_campo: seq_registro
+
 remessa:
   header_arquivo:
     seq_registro:

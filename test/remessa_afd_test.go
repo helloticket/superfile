@@ -28,30 +28,32 @@ func TestRemessaAFD(t *testing.T) {
 	lote := remessa.NovoLote()
 	remessa.InserirLote(lote)
 
-	detalhe := lote.NovoDetalhe()
-	detalhe["segmento_2"]["data_gravacao"] = time.Now()
-	detalhe["segmento_2"]["hora_gravacao"] = time.Now()
-	detalhe["segmento_2"]["identificador_empregador"] = 2
-	detalhe["segmento_2"]["cpf_cnpj_empregador"] = 564281944095
-	detalhe["segmento_2"]["cei_empregador"] = 100000000000
-	detalhe["segmento_2"]["razao_social_ou_nome_empregador"] = "JOSE DA SILVA"
-	detalhe["segmento_2"]["local_prestacao_servico"] = "RUA DOS SONHOS"
+	for i := 0; i < 10; i++ {
+		detalhe := lote.NovoDetalhe()
+		detalhe["segmento_2"]["data_gravacao"] = time.Now()
+		detalhe["segmento_2"]["hora_gravacao"] = time.Now()
+		detalhe["segmento_2"]["identificador_empregador"] = 2
+		detalhe["segmento_2"]["cpf_cnpj_empregador"] = 564281944095
+		detalhe["segmento_2"]["cei_empregador"] = 100000000000
+		detalhe["segmento_2"]["razao_social_ou_nome_empregador"] = "JOSE DA SILVA"
+		detalhe["segmento_2"]["local_prestacao_servico"] = "RUA DOS SONHOS"
 
-	detalhe["segmento_3"]["data_gravacao"] = time.Now()
-	detalhe["segmento_3"]["hora_gravacao"] = time.Now()
-	detalhe["segmento_3"]["numero_pis"] = 70746928042
+		detalhe["segmento_3"]["data_gravacao"] = time.Now()
+		detalhe["segmento_3"]["hora_gravacao"] = time.Now()
+		detalhe["segmento_3"]["numero_pis"] = 70746928042
 
-	detalhe["segmento_4"]["data_ajuste"] = time.Now()
-	detalhe["segmento_4"]["hora_ajuste"] = time.Now()
-	detalhe["segmento_4"]["data_ajustada"] = time.Now()
-	detalhe["segmento_4"]["hora_ajustada"] = time.Now()
+		detalhe["segmento_4"]["data_ajuste"] = time.Now()
+		detalhe["segmento_4"]["hora_ajuste"] = time.Now()
+		detalhe["segmento_4"]["data_ajustada"] = time.Now()
+		detalhe["segmento_4"]["hora_ajustada"] = time.Now()
 
-	detalhe["segmento_5"]["data_gravacao"] = time.Now()
-	detalhe["segmento_5"]["hora_gravacao"] = time.Now()
-	detalhe["segmento_5"]["tipo_operacao"] = "I"
-	detalhe["segmento_5"]["numero_pis"] = 70746928042
-	detalhe["segmento_5"]["nome_empregado"] = "HELOO SOLUTIONS"
-	lote.InserirDetalhe(detalhe)
+		detalhe["segmento_5"]["data_gravacao"] = time.Now()
+		detalhe["segmento_5"]["hora_gravacao"] = time.Now()
+		detalhe["segmento_5"]["tipo_operacao"] = "I"
+		detalhe["segmento_5"]["numero_pis"] = 70746928042
+		detalhe["segmento_5"]["nome_empregado"] = "HELOO SOLUTIONS"
+		lote.InserirDetalhe(detalhe)
+	}
 
 	remessa.Trailer["quantidade_registro_tipo_2"] = 1
 	remessa.Trailer["quantidade_registro_tipo_3"] = 1
@@ -65,5 +67,5 @@ func TestRemessaAFD(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	assertFile(t, 6, arquivo.Name(), true)
+	assertFile(t, 42, arquivo.Name(), true)
 }
