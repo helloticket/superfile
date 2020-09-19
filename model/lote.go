@@ -117,7 +117,7 @@ func (l *Lote) definirEstrategiaOrdenacao(i int, okey string, fields RecordMap) 
 	}
 
 	if val == GlobalSettingsOrdenarEscritaPorNomeCampo {
-		campo, _ := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
+		campo := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
 		if fields[campo] != "" {
 			sorte1 := fields[campo]
 			sorte2 := fields[campo]
@@ -126,7 +126,7 @@ func (l *Lote) definirEstrategiaOrdenacao(i int, okey string, fields RecordMap) 
 	}
 
 	if val == GlobalSettingsOrdenarEscritaPorSufixoECampo {
-		campo, _ := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
+		campo := l.layout.GlobalSettings()["ordenar_escrita_usando_campo"]
 		if fields[campo] != "" {
 			sorte1 := helper.ToSafeInt(strings.TrimPrefix(okey, "segmento_"))
 			sorte2 := fields[campo]
