@@ -953,7 +953,7 @@ retorno:
       numero_sequencial_registro:
         pos: [9, 13]
         picture: "9(5)"
-      codigo_segmento:
+      segmento:
         pos: [14, 14]
         picture: "X(1)"
         default: "T"
