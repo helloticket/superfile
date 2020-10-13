@@ -272,13 +272,13 @@ remessa:
       pos: [143, 150]
       picture: "9(8)"
       data_format: "ddmmyyyy"
-    valor_saldo_inicial:
+    valor_saldo_final:
       pos: [151, 168]
       picture: '9(16)V9(2)'
-    situacao_saldo_inicial:
+    situacao_saldo_final:
       pos: [169, 169]
       picture: 'X(1)'
-    posicao_saldo_inicial:
+    posicao_saldo_final:
       pos: [170, 170]
       picture: 'X(1)'
     quantidade_registros_lote:

@@ -136,9 +136,9 @@ func TestRemessaItauExtratoContaCorrenteCnab240Cobranca(t *testing.T) {
 	lote.Trailer["limite_conta"] = 000000000000000000
 	lote.Trailer["saldo_bloqueado_ate_24_horas"] = 000000000000000000
 	lote.Trailer["data_saldo_final"] = time.Now()
-	lote.Trailer["valor_saldo_inicial"] = float64(10.30)
-	lote.Trailer["situacao_saldo_inicial"] = "0"
-	lote.Trailer["posicao_saldo_inicial"] = "0"
+	lote.Trailer["valor_saldo_final"] = float64(10.30)
+	lote.Trailer["situacao_saldo_final"] = "0"
+	lote.Trailer["posicao_saldo_final"] = "0"
 	lote.Trailer["quantidade_registros_lote"] = 000000
 	lote.Trailer["somatorio_valores_a_debito"] = 000000000000000000
 	lote.Trailer["somatorio_valores_a_credito"] = 000000000000000000
