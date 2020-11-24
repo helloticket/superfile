@@ -14,7 +14,7 @@ import (
 
 func TestRemessaCCSitefExtratoBoaVista(t *testing.T) {
 	source := strings.NewReader(ccsitef.ExtratoEletronico)
-	layout, err := superfile.NewLayout(source)
+	layout, _ := superfile.NewLayout(source)
 	remessa := superfile.NewRemessa(layout)
 
 	remessa.Header["data_geracao"] = 20200522
