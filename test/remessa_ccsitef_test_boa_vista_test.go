@@ -1,7 +1,6 @@
 package test
 
 import (
-	"io/ioutil"
 	"strings"
 	"testing"
 	"time"
@@ -185,16 +184,8 @@ func TestRemessaCCSitefExtratoBoaVista(t *testing.T) {
 
 	arquivo := remessaFile.Write()
 
-	b, err := ioutil.ReadFile(arquivo.Name())
-	if err != nil {
-		panic(err)
-	}
-
-	err = ioutil.WriteFile("/Users/vinicioalves/teste/ccsitef-vendas-homologacao_2.rem", b, 0644)
-
-	assert.Nil(t, err)
 	assert.NotNil(t, layout)
 	assert.NotNil(t, remessa)
 	assert.NotNil(t, arquivo)
-	// assertFile(t, 7, arquivo.Name(), true)
+	assertFile(t, 10, arquivo.Name(), true)
 }
