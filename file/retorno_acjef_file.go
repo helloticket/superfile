@@ -57,7 +57,7 @@ func (r *retornoACJEFFile) decodeSegmento(row string) model.Segmento {
 	valores := model.RecordMap{}
 
 	for _, l := range linhas {
-		valores[l.Name] = l.Value
+		valores[l.Name] = r.decoder.Decode(l.Block, l)
 	}
 
 	return model.Segmento{

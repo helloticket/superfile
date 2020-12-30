@@ -30,5 +30,5 @@ func TestRetornoAFD(t *testing.T) {
 	assert.NotNil(t, retorno)
 	assert.Equal(t, 11, len(retorno.Header))
 	assert.Equal(t, 6, len(retorno.Trailer))
-	assert.Equal(t, 4, len(retorno.Segmentos()))
+	assert.Equal(t, 40, len(retorno.Segmentos()))
 }
