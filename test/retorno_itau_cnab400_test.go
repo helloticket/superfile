@@ -28,7 +28,8 @@ func TestRetornoItauCnab400Cobranca(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)
-	assert.Equal(t, 20, len(retorno.Header))
-	assert.Equal(t, 21, len(retorno.Trailer))
+	assert.Equal(t, 40, len(retorno.Header))
+	assert.Equal(t, 42, len(retorno.Trailer))
 	assert.Equal(t, 4, len(retorno.Segmentos()))
+	assert.Equal(t, 0, len(retorno.Falhas()))
 }

@@ -21,7 +21,7 @@ func NewDecoder(layout model.Layout) *Decoder {
 	}
 }
 
-func (e Decoder) Decode(blockName string, linha model.Linha) interface{} {
+func (e Decoder) Decode(blockName string, linha model.Linha) (interface{}, error) {
 	return linha.Decode(e.picture)
 }
 

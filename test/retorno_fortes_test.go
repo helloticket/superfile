@@ -1,6 +1,7 @@
 package test
 
 import (
+	"log"
 	"os"
 	"strings"
 	"testing"
@@ -28,7 +29,10 @@ func TestRetornoFortes(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)
-	assert.Equal(t, 6, len(retorno.Header))
-	assert.Equal(t, 5, len(retorno.Trailer))
+	assert.Equal(t, 12, len(retorno.Header))
+	assert.Equal(t, 10, len(retorno.Trailer))
 	assert.Equal(t, 7, len(retorno.Segmentos()))
+	assert.Equal(t, 4, len(retorno.Falhas()))
+
+	log.Println(retorno.Falhas())
 }

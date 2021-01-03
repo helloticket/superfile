@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"strings"
 
 	"github.com/helloticket/superfile/helper"
 	"github.com/helloticket/superfile/model"
@@ -28,18 +27,20 @@ func (r *retornoCNAB400File) Read() *model.Retorno {
 	retorno.InserirLote(loteCorrente)
 
 	reader := bufio.NewScanner(r.content)
+	var pos int64 = 0
 
 	for reader.Scan() {
+		pos++
 		linha := reader.Text()
 		tipoRegistro := helper.ToSafeInt(linha[0:1])
 
 		if registroHeaderArquivo == tipoRegistro {
-			retorno.Header = r.decodeFileHeader(linha)
+			retorno.Header = r.decodeFileHeader(pos, retorno, linha)
 		} else if registroTrailerArquivo == tipoRegistro {
-			retorno.Trailer = r.decodeFileTrailer(linha)
+			retorno.Trailer = r.decodeFileTrailer(pos, retorno, linha)
 		} else {
 			numeroSegmentos++
-			segmento := r.decodeSegmento(linha)
+			segmento := r.decodeSegmento(pos, retorno, linha)
 			detalheCorrente[fmt.Sprintf("%d.%s", numeroSegmentos, segmento.Nome)] = segmento.Valores
 		}
 	}
@@ -47,50 +48,20 @@ func (r *retornoCNAB400File) Read() *model.Retorno {
 	return retorno
 }
 
-func (r *retornoCNAB400File) decodeSegmento(row string) model.Segmento {
-	segmento := fmt.Sprintf("segmento_%s", strings.ToLower(row[0:1]))
-	layout := r.getLayoutFor("detalhes")
-	layout = layout[segmento].(map[interface{}]interface{})
-	block := fmt.Sprintf("detalhes.%s", segmento)
-	linhas := r.decoder.Parse(block, row, layout)
+func (r *retornoCNAB400File) decodeSegmento(pos int64, retorno *model.Retorno, row string) model.Segmento {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	valores := model.RecordMap{}
-
-	for _, l := range linhas {
-		valores[l.Name] = r.decoder.Decode(l.Block, l)
-	}
-
-	return model.Segmento{
-		Nome:    segmento,
-		Valores: valores,
-	}
+	return decode.Segmento(pos, 0, 1, row, retorno)
 }
 
-func (r *retornoCNAB400File) decodeFileHeader(row string) map[string]interface{} {
-	header := map[string]interface{}{}
+func (r *retornoCNAB400File) decodeFileHeader(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("header_arquivo", row, r.getLayoutFor("header_arquivo"))
-
-	for _, linha := range linhas {
-		header[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return header
+	return decode.HeaderArquivo(pos, row, retorno)
 }
 
-func (r *retornoCNAB400File) decodeFileTrailer(row string) map[string]interface{} {
-	trailer := map[string]interface{}{}
+func (r *retornoCNAB400File) decodeFileTrailer(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("trailer_arquivo", row, r.getLayoutFor("trailer_arquivo"))
-
-	for _, linha := range linhas {
-		trailer[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return trailer
-}
-
-func (r *retornoCNAB400File) getLayoutFor(name string) map[interface{}]interface{} {
-	config := r.layout.GetRetornoLayout()
-	return config[name].(map[interface{}]interface{})
+	return decode.TrailerArquivo(pos, row, retorno)
 }

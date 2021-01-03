@@ -37,4 +37,5 @@ func TestRetornoFebrabanCnab240Cobranca(t *testing.T) {
 	assert.Equal(t, int64(123), segmentos[0].Valores["lote_servico"])
 	assert.Equal(t, int64(123), segmentos[1].Valores["lote_servico"])
 	assert.Equal(t, int64(123), segmentos[2].Valores["lote_servico"])
+	assert.Equal(t, 0, len(retorno.Falhas()))
 }

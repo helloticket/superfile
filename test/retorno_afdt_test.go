@@ -28,7 +28,8 @@ func TestRetornoAFDT(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)
-	assert.Equal(t, 10, len(retorno.Header))
-	assert.Equal(t, 2, len(retorno.Trailer))
+	assert.Equal(t, 20, len(retorno.Header))
+	assert.Equal(t, 4, len(retorno.Trailer))
 	assert.Equal(t, 1, len(retorno.Segmentos()))
+	assert.Equal(t, 0, len(retorno.Falhas()))
 }

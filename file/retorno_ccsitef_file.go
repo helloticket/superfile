@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"strings"
 
 	"github.com/helloticket/superfile/model"
 )
@@ -28,32 +27,34 @@ func (r *retornoCCSITEFFile) Read() *model.Retorno {
 	detalheCorrente := loteCorrente.NovoDetalhe()
 
 	reader := bufio.NewScanner(r.content)
+	var pos int64 = 0
 
 	for reader.Scan() {
+		pos++
 		linha := reader.Text()
 		tipoRegistro := linha[0:2]
 
 		if registroHeaderArquivo == tipoRegistro {
-			retorno.Header = r.decodeFileHeader(linha)
+			retorno.Header = r.decodeFileHeader(pos, retorno, linha)
 		}
 
 		if registroHeaderLote == tipoRegistro {
 			numeroLote++
 			loteCorrente = retorno.NovoLote(numeroLote)
 			detalheCorrente = loteCorrente.NovoDetalhe()
-			loteCorrente.Header = r.decodeLoteHeader(linha)
+			loteCorrente.Header = r.decodeLoteHeader(pos, retorno, linha)
 		}
 
 		if tipoRegistro == "CV" ||
 			tipoRegistro == "AJ" ||
 			tipoRegistro == "CC" {
 			numeroSegmentos++
-			segmento := r.decodeSegmento(linha)
+			segmento := r.decodeSegmento(pos, retorno, linha)
 			detalheCorrente[fmt.Sprintf("%d.%s", numeroSegmentos, segmento.Nome)] = segmento.Valores
 		}
 
 		if registroTrailerLote == tipoRegistro {
-			loteCorrente.Trailer = r.decodeLoteTrailer(linha)
+			loteCorrente.Trailer = r.decodeLoteTrailer(pos, retorno, linha)
 			loteCorrente.InserirDetalhe(detalheCorrente)
 			retorno.InserirLote(loteCorrente)
 			loteCorrente = nil
@@ -61,81 +62,39 @@ func (r *retornoCCSITEFFile) Read() *model.Retorno {
 		}
 
 		if registroTrailerArquivo == tipoRegistro {
-			retorno.Trailer = r.decodeFileTrailer(reader.Text())
+			retorno.Trailer = r.decodeFileTrailer(pos, retorno, linha)
 		}
 	}
 
 	return retorno
 }
 
-func (r *retornoCCSITEFFile) decodeSegmento(row string) model.Segmento {
-	segmento := fmt.Sprintf("segmento_%s", strings.ToLower(row[0:2]))
-	layout := r.getLayoutFor("detalhes")
-	layout = layout[segmento].(map[interface{}]interface{})
-	block := fmt.Sprintf("detalhes.%s", segmento)
-	linhas := r.decoder.Parse(block, row, layout)
+func (r *retornoCCSITEFFile) decodeSegmento(pos int64, retorno *model.Retorno, row string) model.Segmento {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	valores := model.RecordMap{}
-
-	for _, l := range linhas {
-		valores[l.Name] = r.decoder.Decode(l.Block, l)
-	}
-
-	return model.Segmento{
-		Nome:    segmento,
-		Valores: valores,
-	}
+	return decode.Segmento(pos, 0, 2, row, retorno)
 }
 
-func (r *retornoCCSITEFFile) decodeLoteTrailer(row string) map[string]interface{} {
-	trailer := map[string]interface{}{}
+func (r *retornoCCSITEFFile) decodeLoteTrailer(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("trailer_lote", row, r.getLayoutFor("trailer_lote"))
-
-	for _, linha := range linhas {
-		trailer[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return trailer
+	return decode.TrailerLote(pos, row, retorno)
 }
 
-func (r *retornoCCSITEFFile) decodeLoteHeader(row string) map[string]interface{} {
-	header := map[string]interface{}{}
+func (r *retornoCCSITEFFile) decodeLoteHeader(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("header_lote", row, r.getLayoutFor("header_lote"))
-
-	for _, linha := range linhas {
-		header[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return header
+	return decode.HeaderLote(pos, row, retorno)
 }
 
-func (r *retornoCCSITEFFile) decodeFileHeader(row string) map[string]interface{} {
-	header := map[string]interface{}{}
+func (r *retornoCCSITEFFile) decodeFileHeader(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("header_arquivo", row, r.getLayoutFor("header_arquivo"))
-
-	for _, linha := range linhas {
-		header[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return header
+	return decode.HeaderArquivo(pos, row, retorno)
 }
 
-func (r *retornoCCSITEFFile) decodeFileTrailer(row string) map[string]interface{} {
-	trailer := map[string]interface{}{}
+func (r *retornoCCSITEFFile) decodeFileTrailer(pos int64, retorno *model.Retorno, row string) map[string]interface{} {
+	decode := DecodeRetorno{decoder: r.decoder, layout: r.layout}
 
-	linhas := r.decoder.Parse("trailer_arquivo", row, r.getLayoutFor("trailer_arquivo"))
-
-	for _, linha := range linhas {
-		trailer[linha.Name] = r.decoder.Decode(linha.Block, linha)
-	}
-
-	return trailer
-}
-
-func (r *retornoCCSITEFFile) getLayoutFor(name string) map[interface{}]interface{} {
-	config := r.layout.GetRetornoLayout()
-	return config[name].(map[interface{}]interface{})
+	return decode.TrailerArquivo(pos, row, retorno)
 }

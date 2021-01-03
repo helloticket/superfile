@@ -43,7 +43,7 @@ func (l *Linha) Clone(value interface{}) Linha {
 	}
 }
 
-func (l *Linha) Decode(d field.Picture) interface{} {
+func (l *Linha) Decode(d field.Picture) (interface{}, error) {
 	opt := field.Options{}
 	if l.Format != "" {
 		opt["data_format"] = l.Format
@@ -58,9 +58,10 @@ func (l *Linha) Decode(d field.Picture) interface{} {
 	decoded, err := d.Decode(l.value(), l.Picture, opt)
 	if err != nil {
 		log.Printf("Parser error: %s - %v", l, err)
+		return nil, fmt.Errorf("Parser error: %s - %v", l, err)
 	}
 
-	return decoded
+	return decoded, nil
 }
 
 func (l *Linha) Encode(d field.Picture) string {
