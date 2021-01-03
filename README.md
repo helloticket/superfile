@@ -107,6 +107,12 @@ go get github.com/helloticket/superfile
   log.Println(retorno)
 ```
 
+## Melhorias no tratamento de erros para arquivo de retorno
+
+Cada campo recebeu um adicional para tratar erros, por exemplo: **tipo_registro** recebe **tipo_registro_error**
+
+Outra melhoria foi captura erros linha a linha sem quebrar parse e decode.
+
 ## Inspirado
 
 Baseado no projeto CNAB Layouts (http://glauberportella.github.io/cnab-layouts)
