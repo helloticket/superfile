@@ -33,3 +33,27 @@ func TestRetornoAFD(t *testing.T) {
 	assert.Equal(t, 40, len(retorno.Segmentos()))
 	assert.Equal(t, 0, len(retorno.Falhas()))
 }
+
+func TestRemessaComErrosAFD(t *testing.T) {
+	source := strings.NewReader(mte.AFD)
+	layout, err := superfile.NewLayout(source)
+	assert.Nil(t, err)
+
+	f, err := os.Open("fixtures/afd_enorme.rem")
+	assert.Nil(t, err)
+	defer f.Close()
+
+	arquivo, err := superfile.NewRetornoFile(layout, f)
+	assert.Nil(t, err)
+
+	retorno := arquivo.Read()
+
+	assert.Nil(t, err)
+	assert.NotNil(t, layout)
+	assert.NotNil(t, arquivo)
+	assert.NotNil(t, retorno)
+	assert.Equal(t, 22, len(retorno.Header))
+	assert.Equal(t, 12, len(retorno.Trailer))
+	assert.Equal(t, 19999, len(retorno.Segmentos()))
+	assert.Equal(t, 1, len(retorno.Falhas()))
+}
