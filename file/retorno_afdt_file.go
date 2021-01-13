@@ -1,7 +1,6 @@
 package file
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 
@@ -26,12 +25,7 @@ func (r *retornoAFDTFile) Read() *model.Retorno {
 	loteCorrente.InserirDetalhe(detalheCorrente)
 	retorno.InserirLote(loteCorrente)
 
-	reader := bufio.NewScanner(r.content)
-	var pos int64 = 0
-
-	for reader.Scan() {
-		pos++
-		linha := reader.Text()
+	NewReader(r.content).Mapper(func(pos int64, linha string) {
 		tipoRegistro := helper.ToSafeInt(linha[9:10])
 
 		if registroHeaderArquivo == tipoRegistro {
@@ -43,7 +37,7 @@ func (r *retornoAFDTFile) Read() *model.Retorno {
 			segmento := r.decodeSegmento(pos, retorno, linha)
 			detalheCorrente[fmt.Sprintf("%d.%s", numeroSegmentos, segmento.Nome)] = segmento.Valores
 		}
-	}
+	})
 
 	return retorno
 }

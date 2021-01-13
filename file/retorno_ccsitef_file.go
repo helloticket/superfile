@@ -1,7 +1,6 @@
 package file
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 
@@ -26,12 +25,7 @@ func (r *retornoCCSITEFFile) Read() *model.Retorno {
 	loteCorrente := retorno.NovoLote(numeroLote)
 	detalheCorrente := loteCorrente.NovoDetalhe()
 
-	reader := bufio.NewScanner(r.content)
-	var pos int64 = 0
-
-	for reader.Scan() {
-		pos++
-		linha := reader.Text()
+	NewReader(r.content).Mapper(func(pos int64, linha string) {
 		tipoRegistro := linha[0:2]
 
 		if registroHeaderArquivo == tipoRegistro {
@@ -64,7 +58,7 @@ func (r *retornoCCSITEFFile) Read() *model.Retorno {
 		if registroTrailerArquivo == tipoRegistro {
 			retorno.Trailer = r.decodeFileTrailer(pos, retorno, linha)
 		}
-	}
+	})
 
 	return retorno
 }

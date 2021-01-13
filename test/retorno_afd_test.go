@@ -31,10 +31,10 @@ func TestRetornoAFD(t *testing.T) {
 	assert.Equal(t, 22, len(retorno.Header))
 	assert.Equal(t, 12, len(retorno.Trailer))
 	assert.Equal(t, 40, len(retorno.Segmentos()))
-	assert.Equal(t, 0, len(retorno.Falhas()))
+	assert.Equal(t, 1, len(retorno.Falhas()))
 }
 
-func TestRemessaComErrosAFD(t *testing.T) {
+func TestRetornoComErrosAFD(t *testing.T) {
 	source := strings.NewReader(mte.AFD)
 	layout, err := superfile.NewLayout(source)
 	assert.Nil(t, err)
