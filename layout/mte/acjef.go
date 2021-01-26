@@ -167,12 +167,14 @@ remessa:
       horas_faltas_atrasos:
         pos: [83,86]
         picture: '9(4)'
+        data_format: "hhmm"
       sinal_horas_compensar:
         pos: [87,87]
         picture: '9(1)'
       saldo_horas_compensar:
         pos: [88,91]
         picture: '9(4)'
+        data_format: "hhmm"
 
 retorno:
   header_arquivo:
@@ -318,10 +320,12 @@ retorno:
       horas_faltas_atrasos:
         pos: [83,86]
         picture: '9(4)'
+        data_format: "hhmm"
       sinal_horas_compensar:
         pos: [87,87]
         picture: '9(1)'
       saldo_horas_compensar:
         pos: [88,91]
         picture: '9(4)'
+        data_format: "hhmm"
 `
