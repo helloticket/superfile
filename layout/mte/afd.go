@@ -16,7 +16,8 @@ versao: '1.0.0'
 layout: 'afd'
 
 global:
-  ordenar_escrita_por: sufixo_segmento
+  ordenar_escrita_por: campo_segmento
+  ordenar_escrita_usando_campo: codigo_registro
 
 remessa:
   header_arquivo:
