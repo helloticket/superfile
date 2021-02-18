@@ -6,6 +6,7 @@ const LayoutCCSITEF = "ccsitef"
 const LayoutAFD = "afd"
 const LayoutAFDT = "afdt"
 const LayoutACJEF = "acjef"
+const LayoutAEJ = "aej"
 const LayoutFortesPS = "ps"
 
 var RegisterLayouts = map[string]bool{
@@ -15,6 +16,7 @@ var RegisterLayouts = map[string]bool{
 	LayoutAFD:      true,
 	LayoutAFDT:     true,
 	LayoutACJEF:    true,
+	LayoutAEJ:      true,
 	LayoutFortesPS: true,
 }
 
