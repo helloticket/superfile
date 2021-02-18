@@ -71,9 +71,9 @@ func (e Encoder) Parse(blockName string, source model.RecordMap, layout model.Fi
 
 func (e Encoder) Encode(blockName string, linhas []model.Linha) string {
 	buffer := strings.Builder{}
-
 	var sum int64 = 0
-	for _, l := range linhas {
+
+	for index, l := range linhas {
 		encoded := l.Encode(e.picture)
 		sum += int64(l.Size)
 
@@ -87,7 +87,15 @@ func (e Encoder) Encode(blockName string, linhas []model.Linha) string {
 			`, blockName, l.Name, l.Picture, l.Size, len(encoded), encoded))
 		}
 
-		buffer.WriteString(encoded)
+		rpad := ""
+		if caracter := e.model.GlobalSettingsLayout()["adicao_caracter_a_direita"]; caracter != "" {
+			if index < len(linhas)-1 {
+				rpad = "|"
+				sum++
+			}
+		}
+
+		buffer.WriteString(fmt.Sprintf("%v%v", encoded, rpad))
 	}
 
 	if sum != int64(buffer.Len()) {

@@ -37,6 +37,10 @@ func NewModeloLayout(config model.FileConfigMap) (*ModeloLayout, error) {
 		if value, ok := global["ordenar_escrita_usando_campo"].(string); ok && value != "" {
 			globalSettings["ordenar_escrita_usando_campo"] = value
 		}
+
+		if value, ok := global["adicao_caracter_a_direita"].(string); ok && value != "" {
+			globalSettings["adicao_caracter_a_direita"] = value
+		}
 	}
 
 	return &ModeloLayout{

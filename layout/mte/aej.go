@@ -16,8 +16,8 @@ versao: '1.0.0'
 layout: 'aej'
 
 global:
-  ordenar_escrita_por: campo_segmento
-  ordenar_escrita_usando_campo: codigo_registro
+  ordenar_escrita_usando_campo: tipo_registro
+  adicao_caracter_a_direita: "|"
 
 remessa:
   header_arquivo:
@@ -152,7 +152,7 @@ remessa:
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
-        default: 3
+        default: 4
       identificador_vinculo:
         pos: [11,19]
         picture: '9(9)'
@@ -269,42 +269,42 @@ retorno:
       pos: [230,232]
       picture: 'X(3)'
       default: "001"
-
+  
   trailer_arquivo:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 999999999
-      tipo_registro:
-        pos: [10,10]
-        picture: '9(1)'
-        default: 9
-      quantidade_registro_tipo_1:
-        pos: [11,19]
-        picture: '9(9)'
-      quantidade_registro_tipo_2:
-        pos: [20,28]
-        picture: '9(9)'
-      quantidade_registro_tipo_3:
-        pos: [29,37]
-        picture: '9(9)'
-      quantidade_registro_tipo_4:
-        pos: [38,46]
-        picture: '9(9)'
-      quantidade_registro_tipo_5:
-        pos: [47,55]
-        picture: '9(9)'
-      quantidade_registro_tipo_6:
-        pos: [56,64]
-        picture: '9(9)'
-
-
+    codigo_registro:
+      pos: [1,9]
+      picture: '9(9)'
+      default: 999999999
+    tipo_registro:
+      pos: [10,10]
+      picture: '9(1)'
+      default: 9
+    quantidade_registro_tipo_1:
+      pos: [11,19]
+      picture: '9(9)'
+    quantidade_registro_tipo_2:
+      pos: [20,28]
+      picture: '9(9)'
+    quantidade_registro_tipo_3:
+      pos: [29,37]
+      picture: '9(9)'
+    quantidade_registro_tipo_4:
+      pos: [38,46]
+      picture: '9(9)'
+    quantidade_registro_tipo_5:
+      pos: [47,55]
+      picture: '9(9)'
+    quantidade_registro_tipo_6:
+      pos: [56,64]
+      picture: '9(9)'
+    
+  
   detalhes:
     segmento_2:
       codigo_registro:
         pos: [1,9]
         picture: '9(9)'
-        default: NST
+        default: '0'
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -322,7 +322,7 @@ retorno:
       codigo_registro:
         pos: [1,9]
         picture: '9(9)'
-        default: NST
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -353,11 +353,11 @@ retorno:
       codigo_registro:
         pos: [1,9]
         picture: '9(9)'
-        default: NST
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
-        default: 3
+        default: 4
       identificador_vinculo:
         pos: [11,19]
         picture: '9(9)'
@@ -392,7 +392,7 @@ retorno:
       codigo_registro:
         pos: [1,9]
         picture: '9(9)'
-        default: NST
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -407,7 +407,7 @@ retorno:
       codigo_registro:
         pos: [1,9]
         picture: '9(9)'
-        default: NST
+        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -415,7 +415,7 @@ retorno:
       nome_dev:
         pos: [11,160]
         picture: 'X(150)'
-        versao_ptrp:
+      versao_ptrp:
         pos: [161,168]
         picture: 'X(8)'
       tipo_id_dev:

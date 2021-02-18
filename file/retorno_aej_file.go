@@ -3,6 +3,7 @@ package file
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/helloticket/superfile/helper"
 	"github.com/helloticket/superfile/model"
@@ -25,13 +26,18 @@ func (r *retornoAEJFile) Read() *model.Retorno {
 	loteCorrente.InserirDetalhe(detalheCorrente)
 	retorno.InserirLote(loteCorrente)
 
-	NewReader(r.content).Mapper(func(pos int64, linha string) {
+	NewReader(r.content).Mapper(func(pos int64, source string) {
+		linha := source
+		if caracter := r.layout.GlobalSettings()["adicao_caracter_a_direita"]; caracter != "" {
+			linha = strings.ReplaceAll(source, "|", "")
+		}
+
 		tipoRegistro := helper.ToSafeInt(linha[9:10])
 		codigoRegistro := helper.ToSafeInt(linha[0:9])
 
 		if registroHeaderArquivo == tipoRegistro {
 			retorno.Header = r.decodeFileHeader(pos, retorno, linha)
-		} else if codigoRegistro == registroTrailerArquivo && tipoRegistro == 0 {
+		} else if codigoRegistro == registroTrailerArquivo && tipoRegistro == 9 {
 			retorno.Trailer = r.decodeFileTrailer(pos, retorno, linha)
 		} else {
 			numeroSegmentos++
