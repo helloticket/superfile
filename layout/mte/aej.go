@@ -21,10 +21,6 @@ global:
 
 remessa:
   header_arquivo:
-    codigo_registro:
-      pos: [1,9]
-      picture: '9(9)'
-      default: 0
     tipo_registro:
       pos: [10,10]
       picture: '9(1)'
@@ -66,10 +62,6 @@ remessa:
       default: "001"
   
   trailer_arquivo:
-    codigo_registro:
-      pos: [1,9]
-      picture: '9(9)'
-      default: 999999999
     tipo_registro:
       pos: [10,10]
       picture: '9(1)'
@@ -96,10 +88,6 @@ remessa:
   
   detalhes:
     segmento_2:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: '0'
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -114,10 +102,6 @@ remessa:
         pos: [31,180]
         picture: 'X(150)'
     segmento_3:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -145,10 +129,6 @@ remessa:
         picture: '9(4)'
         data_format: "hhmm"
     segmento_4:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -184,10 +164,6 @@ remessa:
         pos: [84,233]
         picture: 'X(150)'
     segmento_5:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -199,10 +175,6 @@ remessa:
         pos: [20,49]
         picture: 'X(30)'
     segmento_6:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -226,10 +198,6 @@ remessa:
 
 retorno:
   header_arquivo:
-    codigo_registro:
-      pos: [1,9]
-      picture: '9(9)'
-      default: 0
     tipo_registro:
       pos: [10,10]
       picture: '9(1)'
@@ -271,10 +239,6 @@ retorno:
       default: "001"
   
   trailer_arquivo:
-    codigo_registro:
-      pos: [1,9]
-      picture: '9(9)'
-      default: 999999999
     tipo_registro:
       pos: [10,10]
       picture: '9(1)'
@@ -301,10 +265,6 @@ retorno:
   
   detalhes:
     segmento_2:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: '0'
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -319,10 +279,6 @@ retorno:
         pos: [31,180]
         picture: 'X(150)'
     segmento_3:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -350,10 +306,6 @@ retorno:
         picture: '9(4)'
         data_format: "hhmm"
     segmento_4:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -389,10 +341,6 @@ retorno:
         pos: [84,233]
         picture: 'X(150)'
     segmento_5:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
@@ -404,10 +352,6 @@ retorno:
         pos: [20,49]
         picture: 'X(30)'
     segmento_6:
-      codigo_registro:
-        pos: [1,9]
-        picture: '9(9)'
-        default: 0
       tipo_registro:
         pos: [10,10]
         picture: '9(1)'
