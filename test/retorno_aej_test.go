@@ -28,8 +28,8 @@ func TestRetornoAEJValido(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)
-	assert.Equal(t, 24, len(retorno.Header))
-	assert.Equal(t, 16, len(retorno.Trailer))
-	assert.Equal(t, 5, len(retorno.Segmentos()))
+	assert.Equal(t, 22, len(retorno.Header))
+	assert.Equal(t, 14, len(retorno.Trailer))
+	assert.Equal(t, 20, len(retorno.Segmentos()))
 	assert.Equal(t, 0, len(retorno.Falhas()))
 }

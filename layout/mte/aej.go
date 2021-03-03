@@ -188,12 +188,15 @@ remessa:
       tipo_id_dev:
         pos: [169,169]
         picture: '9(1)'
-        default: 2
+        default: 1
+      id_dev:
+        pos: [170,183]
+        picture: '9(14)'
       razao_social_dev:
-        pos: [170,319]
+        pos: [184,333]
         picture: 'X(150)'
       email_dev:
-        pos: [320,369]
+        pos: [334,383]
         picture: 'X(50)'
 
 retorno:
@@ -365,11 +368,14 @@ retorno:
       tipo_id_dev:
         pos: [169,169]
         picture: '9(1)'
-        default: 2
+        default: 1
+      id_dev:
+        pos: [170,183]
+        picture: 'X(14)'
       razao_social_dev:
-        pos: [170,319]
-        picture: 'X(150)'
+        pos: [184,333]
+        picture: '9(150)'
       email_dev:
-        pos: [320,369]
+        pos: [334,383]
         picture: 'X(50)'
 `

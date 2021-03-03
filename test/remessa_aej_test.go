@@ -54,7 +54,8 @@ func TestRemessaAEJ(t *testing.T) {
 
 		detalhes["segmento_6"]["nome_dev"] = "HELOO PONTO"
 		detalhes["segmento_6"]["versao_ptrp"] = "1.0"
-		detalhes["segmento_6"]["tipo_id_dev"] = 2
+		detalhes["segmento_6"]["tipo_id_dev"] = 1
+		detalhes["segmento_6"]["id_dev"] = 33177852000108
 		detalhes["segmento_6"]["razao_social_dev"] = "HELOO SOLUTIONS"
 		detalhes["segmento_6"]["email_dev"] = "comercial@heloo.com.br"
 		lote.InserirDetalhe(detalhes)
