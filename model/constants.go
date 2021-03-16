@@ -4,6 +4,7 @@ const LayoutCNAB240 = "cnab240"
 const LayoutCNAB400 = "cnab400"
 const LayoutCCSITEF = "ccsitef"
 const LayoutAFD = "afd"
+const LayoutAFDV3 = "afdv3"
 const LayoutAFDT = "afdt"
 const LayoutACJEF = "acjef"
 const LayoutAEJ = "aej"
@@ -14,6 +15,7 @@ var RegisterLayouts = map[string]bool{
 	LayoutCNAB400:  true,
 	LayoutCCSITEF:  true,
 	LayoutAFD:      true,
+	LayoutAFDV3:    true,
 	LayoutAFDT:     true,
 	LayoutACJEF:    true,
 	LayoutAEJ:      true,

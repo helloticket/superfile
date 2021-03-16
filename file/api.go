@@ -41,6 +41,14 @@ func NewRemessaFile(remessa *model.Remessa, fileName string) RemessaFile {
 		}
 	}
 
+	if remessa.GetLayout() == model.LayoutAFDV3 {
+		return &remessaAFDV3File{
+			model:    remessa,
+			fileName: fileName,
+			encoder:  NewEncoder(remessa),
+		}
+	}
+
 	if remessa.GetLayout() == model.LayoutAEJ {
 		return &remessaAEJFile{
 			model:    remessa,
@@ -107,6 +115,14 @@ func NewRetornoFile(layout model.Layout, content io.Reader) (RetornoFile, error)
 
 	if layout.GetLayout() == model.LayoutAFD {
 		return &retornoAFDFile{
+			layout:  layout,
+			content: content,
+			decoder: NewDecoder(layout),
+		}, nil
+	}
+
+	if layout.GetLayout() == model.LayoutAFDV3 {
+		return &retornoAFDV3File{
 			layout:  layout,
 			content: content,
 			decoder: NewDecoder(layout),
