@@ -1,8 +1,8 @@
 package mte
 
 const AFD_V3 = `
-# FORMATO: AFDLayout003
-# OBJETIVO DO ARQUIVO: Arquivo-Fonte de Dados – AFDLayout003
+# FORMATO: AFDV3
+# OBJETIVO DO ARQUIVO: Arquivo-Fonte de Dados – AFDV3
 #
 # TAMANHO DO REGISTRO
 # O Tamanho do Registro é de 232 bytes.
@@ -34,7 +34,7 @@ remessa:
       picture: '9(1)'
     cpf_cnpj_empregador:
       pos: [12,25]
-      picture: '9(14)'
+      picture: 'X(14)'
     cno_caepf_empregador:
       pos: [26,39]
       picture: '9(14)'
@@ -43,7 +43,7 @@ remessa:
       picture: 'X(150)'
     inpi_empregador:
       pos: [190,206]
-      picture: 'X(17)'
+      picture: '9(17)'
       default: 99999999999999999
     data_inicio:
       pos: [207,214]
@@ -61,7 +61,7 @@ remessa:
       pos: [231,234]
       picture: '9(4)'
       data_format: "hhmm"
-    tipo_registro:
+    layout_versao:
       pos: [235,237]
       picture: '9(3)'
       default: 3
@@ -76,22 +76,22 @@ remessa:
       default: 999999999
     quantidade_registro_tipo_2:
       pos: [10,18]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_3:
       pos: [19,27]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_4:
       pos: [28,36]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_5:
       pos: [37,45]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_6:
       pos: [46,54]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_7:
       pos: [55,63]
-      picture: '9(9)'
+      picture: 'X(9)'
     tipo_registro:
       pos: [64,64]
       picture: '9(1)'
@@ -117,16 +117,16 @@ remessa:
         data_format: "hhmm"
       cpf_responsavel:
         pos: [23,36]
-        picture: '9(14)'
+        picture: 'X(14)'
       identificador_empregador:
         pos: [37,37]
         picture: '9(1)'
       cpf_cnpj_empregador:
         pos: [38,51]
-        picture: '9(14)'
+        picture: 'X(14)'
       cno_caepf_empregador:
         pos: [52,65]
-        picture: '9(14)'
+        picture: 'X(14)'
       razao_social_ou_nome_empregador:
         pos: [66,215]
         picture: 'X(150)'
@@ -155,7 +155,7 @@ remessa:
         data_format: "hhmm"
       cpf_empregado:
         pos: [23,34]
-        picture: '9(12)'
+        picture: 'X(12)'
       crc_registro:
         pos: [35,38]
         picture: 'X(4)'
@@ -186,7 +186,7 @@ remessa:
         data_format: "hhmm"
       cpf_responsavel:
         pos: [35,45]
-        picture: '9(11)'
+        picture: 'X(11)'
       crc_registro:
         pos: [46,49]
         picture: 'X(4)'
@@ -212,7 +212,7 @@ remessa:
         picture: 'X(1)'
       cpf_empregado:
         pos: [24,35]
-        picture: '9(12)'
+        picture: 'X(12)'
       nome_empregado:
         pos: [36,87]
         picture: 'X(52)'
@@ -221,7 +221,7 @@ remessa:
         picture: 'X(4)'
       cpf_responsavel:
         pos: [92,102]
-        picture: '9(11)'
+        picture: 'X(11)'
       crc_registro:
         pos: [103,106]
         picture: 'X(4)'
@@ -264,7 +264,7 @@ remessa:
         data_format: "hhmm"
       cpf_empregado:
         pos: [23,34]
-        picture: '9(12)'
+        picture: 'X(12)'
       data_gravacao:
         pos: [35,42]
         picture: '9(8)'
@@ -295,10 +295,10 @@ retorno:
       picture: '9(1)'
     cpf_cnpj_empregador:
       pos: [12,25]
-      picture: '9(14)'
+      picture: 'X(14)'
     cno_caepf_empregador:
       pos: [26,39]
-      picture: '9(14)'
+      picture: 'X(14)'
     razao_social_empregador:
       pos: [40,189]
       picture: 'X(150)'
@@ -322,7 +322,7 @@ retorno:
       pos: [231,234]
       picture: '9(4)'
       data_format: "hhmm"
-    tipo_registro:
+    layout_versao:
       pos: [235,237]
       picture: '9(3)'
       default: 3
@@ -337,22 +337,22 @@ retorno:
       default: 999999999
     quantidade_registro_tipo_2:
       pos: [10,18]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_3:
       pos: [19,27]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_4:
       pos: [28,36]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_5:
       pos: [37,45]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_6:
       pos: [46,54]
-      picture: '9(9)'
+      picture: 'X(9)'
     quantidade_registro_tipo_7:
       pos: [55,63]
-      picture: '9(9)'
+      picture: 'X(9)'
     tipo_registro:
       pos: [64,64]
       picture: '9(1)'
@@ -378,16 +378,16 @@ retorno:
         data_format: "hhmm"
       cpf_responsavel:
         pos: [23,36]
-        picture: '9(14)'
+        picture: 'X(14)'
       identificador_empregador:
         pos: [37,37]
         picture: '9(1)'
       cpf_cnpj_empregador:
         pos: [38,51]
-        picture: '9(14)'
+        picture: 'X(14)'
       cno_caepf_empregador:
         pos: [52,65]
-        picture: '9(14)'
+        picture: 'X(14)'
       razao_social_ou_nome_empregador:
         pos: [66,215]
         picture: 'X(150)'
@@ -416,7 +416,7 @@ retorno:
         data_format: "hhmm"
       cpf_empregado:
         pos: [23,34]
-        picture: '9(12)'
+        picture: 'X(12)'
       crc_registro:
         pos: [35,38]
         picture: 'X(4)'
@@ -447,7 +447,7 @@ retorno:
         data_format: "hhmm"
       cpf_responsavel:
         pos: [35,45]
-        picture: '9(11)'
+        picture: 'X(11)'
       crc_registro:
         pos: [46,49]
         picture: 'X(4)'
@@ -473,7 +473,7 @@ retorno:
         picture: 'X(1)'
       cpf_empregado:
         pos: [24,35]
-        picture: '9(12)'
+        picture: 'X(12)'
       nome_empregado:
         pos: [36,87]
         picture: 'X(52)'
@@ -482,7 +482,7 @@ retorno:
         picture: 'X(4)'
       cpf_responsavel:
         pos: [92,102]
-        picture: '9(11)'
+        picture: 'X(11)'
       crc_registro:
         pos: [103,106]
         picture: 'X(4)'
@@ -525,7 +525,7 @@ retorno:
         data_format: "hhmm"
       cpf_empregado:
         pos: [23,34]
-        picture: '9(12)'
+        picture: 'X(12)'
       data_gravacao:
         pos: [35,42]
         picture: '9(8)'

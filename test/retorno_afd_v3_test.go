@@ -28,7 +28,7 @@ func TestRetornoAFDV3(t *testing.T) {
 	assert.NotNil(t, layout)
 	assert.NotNil(t, arquivo)
 	assert.NotNil(t, retorno)
-	assert.Equal(t, 24, len(retorno.Header))
+	assert.Equal(t, 26, len(retorno.Header))
 	assert.Equal(t, 6, len(retorno.Segmentos()))
 	assert.Equal(t, 16, len(retorno.Trailer))
 	assert.Equal(t, 0, len(retorno.Falhas()))
