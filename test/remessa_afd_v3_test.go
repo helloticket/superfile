@@ -86,12 +86,12 @@ func TestRemessaAFDV3(t *testing.T) {
 		lote.InserirDetalhe(detalhe)
 	}
 
-	remessa.Trailer["quantidade_registro_tipo_2"] = "1"
-	remessa.Trailer["quantidade_registro_tipo_3"] = "1"
-	remessa.Trailer["quantidade_registro_tipo_4"] = "1"
-	remessa.Trailer["quantidade_registro_tipo_5"] = "1"
-	remessa.Trailer["quantidade_registro_tipo_6"] = "1"
-	remessa.Trailer["quantidade_registro_tipo_7"] = "1"
+	remessa.Trailer["quantidade_registro_tipo_2"] = 1
+	remessa.Trailer["quantidade_registro_tipo_3"] = 1
+	remessa.Trailer["quantidade_registro_tipo_4"] = 1
+	remessa.Trailer["quantidade_registro_tipo_5"] = 1
+	remessa.Trailer["quantidade_registro_tipo_6"] = 1
+	remessa.Trailer["quantidade_registro_tipo_7"] = 1
 	remessaFile := file.NewRemessaFile(remessa, "afdv3.rem")
 
 	arquivo := remessaFile.Write()

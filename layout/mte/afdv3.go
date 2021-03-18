@@ -37,7 +37,7 @@ remessa:
       picture: 'X(14)'
     cno_caepf_empregador:
       pos: [26,39]
-      picture: '9(14)'
+      picture: 'X(14)'
     razao_social_empregador:
       pos: [40,189]
       picture: 'X(150)'
@@ -76,22 +76,22 @@ remessa:
       default: 999999999
     quantidade_registro_tipo_2:
       pos: [10,18]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_3:
       pos: [19,27]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_4:
       pos: [28,36]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_5:
       pos: [37,45]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_6:
       pos: [46,54]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_7:
       pos: [55,63]
-      picture: 'X(9)'
+      picture: '9(9)'
     tipo_registro:
       pos: [64,64]
       picture: '9(1)'
@@ -304,7 +304,7 @@ retorno:
       picture: 'X(150)'
     inpi_empregador:
       pos: [190,206]
-      picture: 'X(17)'
+      picture: '9(17)'
       default: 99999999999999999
     data_inicio:
       pos: [207,214]
@@ -337,22 +337,22 @@ retorno:
       default: 999999999
     quantidade_registro_tipo_2:
       pos: [10,18]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_3:
       pos: [19,27]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_4:
       pos: [28,36]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_5:
       pos: [37,45]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_6:
       pos: [46,54]
-      picture: 'X(9)'
+      picture: '9(9)'
     quantidade_registro_tipo_7:
       pos: [55,63]
-      picture: 'X(9)'
+      picture: '9(9)'
     tipo_registro:
       pos: [64,64]
       picture: '9(1)'
