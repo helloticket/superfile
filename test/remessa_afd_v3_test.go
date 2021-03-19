@@ -78,7 +78,7 @@ func TestRemessaAFDV3(t *testing.T) {
 		detalhe["segmento_7"]["codigo_registro"] = 5
 		detalhe["segmento_7"]["data_marcacao"] = time.Now()
 		detalhe["segmento_7"]["hora_marcacao"] = time.Now()
-		detalhe["segmento_7"]["cpf_empregado"] = "564281944095"
+		detalhe["segmento_7"]["cpf_empregado"] = "56428194409"
 		detalhe["segmento_7"]["data_gravacao"] = time.Now()
 		detalhe["segmento_7"]["hora_gravacao"] = time.Now()
 		detalhe["segmento_7"]["identificador_marcacao"] = 02

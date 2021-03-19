@@ -263,21 +263,21 @@ remessa:
         picture: '9(4)'
         data_format: "hhmm"
       cpf_empregado:
-        pos: [23,34]
-        picture: 'X(12)'
+        pos: [23,33]
+        picture: 'X(11)'
       data_gravacao:
-        pos: [35,42]
+        pos: [34,41]
         picture: '9(8)'
         data_format: "ddmmyyyy"
       hora_gravacao:
-        pos: [43,46]
+        pos: [42,45]
         picture: '9(4)'
         data_format: "hhmm"
       identificador_marcacao:
-        pos: [47,48]
+        pos: [46,47]
         picture: '9(2)'
       codigo_hash:
-        pos: [49,112]
+        pos: [48,111]
         picture: 'X(64)'
 
 retorno:
@@ -524,20 +524,20 @@ retorno:
         picture: '9(4)'
         data_format: "hhmm"
       cpf_empregado:
-        pos: [23,34]
-        picture: 'X(12)'
+        pos: [23,33]
+        picture: 'X(11)'
       data_gravacao:
-        pos: [35,42]
+        pos: [34,41]
         picture: '9(8)'
         data_format: "ddmmyyyy"
       hora_gravacao:
-        pos: [43,46]
+        pos: [42,45]
         picture: '9(4)'
         data_format: "hhmm"
       identificador_marcacao:
-        pos: [47,48]
+        pos: [46,47]
         picture: '9(2)'
       codigo_hash:
-        pos: [49,112]
+        pos: [48,111]
         picture: 'X(64)'
 `
