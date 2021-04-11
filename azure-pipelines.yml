@@ -10,60 +10,39 @@ jobs:
       vmImage: "ubuntu-20.04"
 
     variables:
-      GOBIN: "$(GOPATH)/bin" # Go binaries path
-      GOROOT: "/usr/local/go1.14" # Go installation path
-      GOPATH: "$(system.defaultWorkingDirectory)/gopath" # Go workspace path
-      modulePath: "$(GOPATH)/src/github.com/$(build.repository.name)" # Path to the module's code
+      - group: Environments
+      - name: goVersion
+        value: "1.15.6"
+      - name: sonarVersion
+        value: "4.6.0.2311"
 
     steps:
       - task: GoTool@0
         inputs:
-          version: "1.14"
-
-      - script: |
-          mkdir -p '$(GOBIN)'
-          mkdir -p '$(GOPATH)/pkg'
-          mkdir -p '$(modulePath)'
-          shopt -s extglob
-          shopt -s dotglob
-          mv !(gopath) '$(modulePath)'
-          echo '##vso[task.prependpath]$(GOBIN)'
-          echo '##vso[task.prependpath]$(GOROOT)/bin'
-        displayName: "Set up the Go workspace"
-
-      - script: |
-          go get github.com/securego/gosec/cmd/gosec
-          gosec -quiet ./...
-        workingDirectory: "$(modulePath)"
-        env:
-          GO111MODULE: on
-        displayName: "Application Security Testing"
-
-      - script: |
-          go get -v honnef.co/go/tools/cmd/staticcheck
-          staticcheck -checks "inherit,-ST1005" -f stylish ./...
-        workingDirectory: "$(modulePath)"
-        env:
-          GO111MODULE: on
-        displayName: "Static Analysis"
+          version: "$(goVersion)"
+        displayName: "Install go"
 
       - script: |
           make test
-          make coverage
-        workingDirectory: "$(modulePath)"
         env:
           GO111MODULE: on
         displayName: "Test"
 
-      - task: PublishTestResults@2
-        inputs:
-          testRunner: JUnit
-          testResultsFiles: $(System.DefaultWorkingDirectory)/**/report.xml
+      - script: |
+          go test $(go list ./... | grep -v /vendor | grep -v /test | grep -v /api) -cover=1 -short -coverprofile=./cov.out ./...
+        env:
+          GO111MODULE: on
+        displayName: "Save coverage"
 
-      - task: PublishCodeCoverageResults@1
-        inputs:
-          codeCoverageTool: Cobertura
-          pathToSources: "$(System.DefaultWorkingDirectory)"
-          summaryFileLocation: $(System.DefaultWorkingDirectory)/**/coverage.xml
-          reportDirectory: $(System.DefaultWorkingDirectory)/**/coverage
-          failIfCoverageEmpty: true
+      - script: |
+          wget -qO- https://github.com/securego/gosec/releases/download/v2.7.0/gosec_2.7.0_linux_amd64.tar.gz | tar xvz
+          ./gosec -no-fail -exclude-dir=test -exclude-dir=vendor -exclude-dir=api -fmt=sonarqube -out report.json ./...
+        env:
+          GO111MODULE: on
+        displayName: "Save secuity checker"
+
+      - script: |
+          wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$(sonarVersion)-linux.zip -O sonar.zip
+          unzip sonar.zip
+          sonar-scanner-$(sonarVersion)-linux/bin/sonar-scanner -Dsonar.login=$(SONARQUBE) -Dsonar.host.url=$(SONARQUBE_URL)
+        displayName: "Run sonar scanner"
