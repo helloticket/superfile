@@ -79,7 +79,7 @@ remessa:
       picture: "9(6)"
     total_valores_creditos:
       pos: [9, 22]
-      picture: "9(12)V9(2)"
+      picture: "9(14)"
     nseq:
       pos: [23, 28]
       picture: "9(6)"
@@ -119,13 +119,13 @@ remessa:
         picture: "9(1)"
       valor_bruno_venda:
         pos: [55, 65]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto:
         pos: [66, 76]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquida_venda:
         pos: [77, 87]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       numero_cartao:
         pos: [88, 106]
         picture: "X(19)"
@@ -140,13 +140,13 @@ remessa:
         picture: "X(12)"
       valor_bruto_parcela:
         pos: [123, 133]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto_parcela:
         pos: [134, 144]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquido_parcela:
         pos: [145, 155]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       banco:
         pos: [156, 158]
         picture: "9(3)"
@@ -213,13 +213,13 @@ remessa:
         picture: "X(30)"
       valor_bruto_parcela:
         pos: [110, 120]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto_comissao:
         pos: [121, 131]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquido:
         pos: [132, 142]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       banco:
         pos: [143, 145]
         picture: "9(3)"
@@ -342,7 +342,7 @@ retorno:
       picture: "9(6)"
     total_valores_creditos:
       pos: [9, 22]
-      picture: "9(12)V9(2)"
+      picture: "9(14)"
     nseq:
       pos: [23, 28]
       picture: "9(6)"
@@ -382,13 +382,13 @@ retorno:
         picture: "9(1)"
       valor_bruno_venda:
         pos: [55, 65]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto:
         pos: [66, 76]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquida_venda:
         pos: [77, 87]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       numero_cartao:
         pos: [88, 106]
         picture: "X(19)"
@@ -403,13 +403,13 @@ retorno:
         picture: "X(12)"
       valor_bruto_parcela:
         pos: [123, 133]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto_parcela:
         pos: [134, 144]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquido_parcela:
         pos: [145, 155]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       banco:
         pos: [156, 158]
         picture: "9(3)"
@@ -476,13 +476,13 @@ retorno:
         picture: "X(30)"
       valor_bruto_parcela:
         pos: [110, 120]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_desconto_comissao:
         pos: [121, 131]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       valor_liquido:
         pos: [132, 142]
-        picture: "9(9)V9(2)"
+        picture: "9(11)"
       banco:
         pos: [143, 145]
         picture: "9(3)"
