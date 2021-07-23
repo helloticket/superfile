@@ -16,7 +16,6 @@ versao: '3.0.0'
 layout: 'ps'
 
 global:
-  alinhamento_alfanumerico: 'X'
 
 remessa:
   header_arquivo:
@@ -188,11 +187,11 @@ retorno:
   trailer_arquivo:
     identificacao_registro:
       pos: [1,1]
-      picture: '9(1)'
+      picture: 'X(1)'
       default: 'Z'
     quantidade_movimentos:
       pos: [2,6]
-      picture: 'X(5)'
+      picture: '9(5)'
     total_valor_ref_eventos:
       pos: [7,21]
       picture: '9(12)V9(2)'
